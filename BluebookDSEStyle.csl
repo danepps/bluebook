@@ -99,6 +99,8 @@
     <if variable="URL">
       <group delimiter=" ">
         <text variable="URL"/>
+    <choose>
+      <if type="webpage">
         <choose>
           <if variable="accessed">
             <group delimiter=" " prefix="(" suffix=")">
@@ -111,11 +113,13 @@
             </group>
           </if>
         </choose>
+           </if>
+        </choose>
       </group>
     </if>
   </choose>
 </macro>
-  <macro name="source">
+<macro name="source">
     <choose>
       <if type="article-journal" match="any">
         <group delimiter=" ">
