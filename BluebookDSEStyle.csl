@@ -2,8 +2,8 @@
 <style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
     <title>Bluebook Style — Epps Variations</title>
-    <id>http://www.zotero.org/styles/bluebook-law-review5</id>
-    <link href="http://www.zotero.org/styles/bluebook-law-review2" rel="self"/>
+    <id>https://raw.githubusercontent.com/danepps/bluebook/main/BluebookDSEStyle.csl</id>
+    <link href="https://raw.githubusercontent.com/danepps/bluebook/main/BluebookDSEStyle.csl" rel="self"/>
     <link href="https://www.legalbluebook.com/" rel="documentation"/>
     <author>
       <name>Bruce D'Arcus</name>
