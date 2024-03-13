@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
-    <title>Bluebook Style — Epps Variations</title>
+    <title>Bluebook Style — Epps Version</title>
     <id>https://raw.githubusercontent.com/danepps/bluebook/main/BluebookDSEStyle.csl</id>
     <link href="https://raw.githubusercontent.com/danepps/bluebook/main/BluebookDSEStyle.csl" rel="self"/>
     <link href="https://www.legalbluebook.com/" rel="documentation"/>
