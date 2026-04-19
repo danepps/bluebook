@@ -144,7 +144,7 @@
       </else-if>
 <else-if type="article">
   <choose>
-    <if variable="container-title">
+    <if variable="status">
       <group delimiter=" ">
         <group delimiter=", ">
           <text variable="title" font-style="italic"/>
@@ -154,7 +154,7 @@
           </group>
         </group>
         <group prefix="(" suffix=")" delimiter=" ">
-          <text value="forthcoming"/>
+          <text variable="status"/>
           <date variable="issued">
             <date-part name="year"/>
           </date>
