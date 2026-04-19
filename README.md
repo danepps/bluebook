@@ -63,7 +63,7 @@ A few principles that apply across every item type. Read these once — they'll 
   - Later reference to a non-case → `AUTHOR, *supra* note N, at X`
   - Later reference to a case → Rule 10.9 short form: `*Brown*, 347 U.S. at 495`
 - **The style renders what's in the data — it doesn't look anything up.** If an output is wrong, check the Zotero fields on the item first. The style doesn't validate that `347 U.S. 483` exists or that a journal volume makes sense — it simply formats whatever you typed.
-- **Journal and reporter abbreviations come from Zotero, not this style.** Whether *Harvard Law Review* becomes `Harv. L. Rev.` depends on Zotero's journal-abbreviation setting (Preferences → Cite → *Use MEDLINE journal abbreviations* or a custom abbreviation file). If an abbreviation is wrong, configure it in Zotero — not here.
+- **Journal abbreviations come from each item's `Journal Abbr` field.** The style reads the Bluebook-style abbreviation directly from the **Journal Abbr** field on the Zotero item (e.g., `Harv. L. Rev.`, `Yale L.J.`, `Stan. L. Rev.`). You must fill this in on every journal article when you create the item — there is no central list, and the style does not compute it from the full journal name. **Do not enable Zotero's MEDLINE abbreviation setting** (Preferences → Cite) — MEDLINE uses a different abbreviation scheme (biomedical, no periods) that is not Bluebook-compliant.
 - **Signals are handled by a separate plug-in.** *See*, *See also*, *Cf.*, *But see*, *Contra*, etc. are inserted by **[danepps/zotero](https://github.com/danepps/zotero)** — install that alongside this style if you cite with signals.
 - **Short Title controls the short form.** For books, articles, and cases, the Zotero **Short Title** field (or the CSL `title-short` variable) determines how the shortened name appears in subsequent citations. Fill it in for cleaner *supra* and short-form cites.
 - **Explanatory parentheticals go in manually, per cite.** Bluebook often wants a parenthetical after a source (e.g., `(holding that ...)`, `(noting that ...)`, `(per curiam)`). This style doesn't generate those — add them by hand using Zotero's "Suffix" field in the Add/Edit Citation dialog. In a **string cite where each source has its own parenthetical**, it's easiest to insert each source as its own separate citation rather than combining them into one multi-source cite — that way each source gets its own suffix, and semicolons and signals are easier to control.
@@ -91,7 +91,8 @@ Bluebook requires different output for different kinds of sources. The style ren
 | | Item Type | `Journal Article` | |
 | 🔴 | Author | `Jane Doe` | `Jane Doe` |
 | 🔴 | Title | `Why the Bluebook` | *Why the Bluebook* |
-| 🔴 | Publication | `Harvard Law Review` | Harv. L. Rev. (small caps, via Zotero's journal-abbreviation logic) |
+| 🔴 | Publication | `Harvard Law Review` | (full name — used as a fallback if Journal Abbr is blank) |
+| 🔴 | Journal Abbr | `Harv. L. Rev.` | Harv. L. Rev. (small caps) |
 | 🔴 | Volume | `137` | `137` |
 | 🔴 | Pages | `101` | used as first page |
 | 🔴 | Date | `2024` | `(2024)` |
