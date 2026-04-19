@@ -87,27 +87,37 @@
       <label form="short" strip-periods="false" prefix=" "/>
     </names>
   </macro>
+  <macro name="url-with-accessed">
+    <group delimiter=" ">
+      <text variable="URL"/>
+      <choose>
+        <if variable="accessed">
+          <group delimiter=" " prefix="(" suffix=")">
+            <text value="last visited"/>
+            <date variable="accessed">
+              <date-part name="month" form="short" suffix=" " strip-periods="true"/>
+              <date-part name="day" suffix=", "/>
+              <date-part name="year"/>
+            </date>
+          </group>
+        </if>
+      </choose>
+    </group>
+  </macro>
   <macro name="access">
     <choose>
-      <if type="webpage post-weblog article" match="any">
+      <if variable="URL">
         <choose>
-          <if variable="URL">
-            <group delimiter=" ">
-              <text variable="URL"/>
-              <choose>
-                <if variable="accessed">
-                  <group delimiter=" " prefix="(" suffix=")">
-                    <text value="last visited"/>
-                    <date variable="accessed">
-                      <date-part name="month" form="short" suffix=" " strip-periods="true"/>
-                      <date-part name="day" suffix=", "/>
-                      <date-part name="year"/>
-                    </date>
-                  </group>
-                </if>
-              </choose>
-            </group>
+          <if type="webpage post-weblog article" match="any">
+            <text macro="url-with-accessed"/>
           </if>
+          <else-if type="article-journal" match="any">
+            <choose>
+              <if variable="status">
+                <text macro="url-with-accessed"/>
+              </if>
+            </choose>
+          </else-if>
         </choose>
       </if>
     </choose>
@@ -115,18 +125,39 @@
 <macro name="source">
     <choose>
       <if type="article-journal" match="any">
-        <group delimiter=" ">
-          <group delimiter=", ">
-            <text variable="title" font-style="italic"/>
+        <choose>
+          <if variable="status">
             <group delimiter=" ">
-              <text variable="volume"/>
-              <text macro="container"/>
-              <text variable="page-first"/>
+              <group delimiter=", ">
+                <text variable="title" font-style="italic"/>
+                <group delimiter=" ">
+                  <text variable="volume"/>
+                  <text macro="container"/>
+                </group>
+              </group>
+              <group prefix="(" suffix=")" delimiter=" ">
+                <text variable="status"/>
+                <date variable="issued">
+                  <date-part name="year"/>
+                </date>
+              </group>
             </group>
-            <text variable="locator"/>
-          </group>
-          <text macro="issuance" prefix="(" suffix=")"/>
-        </group>
+          </if>
+          <else>
+            <group delimiter=" ">
+              <group delimiter=", ">
+                <text variable="title" font-style="italic"/>
+                <group delimiter=" ">
+                  <text variable="volume"/>
+                  <text macro="container"/>
+                  <text variable="page-first"/>
+                </group>
+                <text variable="locator"/>
+              </group>
+              <text macro="issuance" prefix="(" suffix=")"/>
+            </group>
+          </else>
+        </choose>
       </if>
       <else-if type="legal_case">
         <group delimiter=" ">
