@@ -59,7 +59,7 @@ Don't try to implement these in pure CSL. Point users at the plug-in instead.
 ## Author workflow preferences
 
 - The author typically **enters cases and case short forms manually** in the footnote text rather than through Zotero, because of the five-footnote-rule limitation. The style's case output is a safety net, not the primary path.
-- **Explanatory parentheticals are entered manually per cite**, via Zotero's Suffix field. For a string cite where each source has its own parenthetical, insert each source as a separate cite rather than combining into one multi-source cite.
+- **Explanatory parentheticals are entered manually per cite**, typed directly into the footnote text after the citation — not into Zotero's Suffix field. For a string cite where each source has its own parenthetical, insert each source as a separate cite rather than combining into one multi-source cite, so each parenthetical can be typed between the inserted cites.
 - **Journal abbreviations come from each item's `Journal Abbr` field** in Zotero, filled in per item. The MEDLINE abbreviation setting in Zotero is NOT Bluebook-compliant and should be off.
 - **Signals via the plug-in or Zotero's Prefix field**, never typed directly into the document — that breaks automatic `id.` lowercasing.
 
