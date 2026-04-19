@@ -2,6 +2,12 @@
 
 Persistent project context that survives conversation resets. Keep it tight; long files dilute the useful bits.
 
+## Keep this file up to date
+
+Whenever a new workflow convention or CSL design choice gets settled in a session — a new intentional deviation, a new "out of scope" item delegated to the plug-in, a change to the narrow-PR / experimental-first workflow, a new author preference — **append or update the relevant section of this file before ending the turn**, and include the update in the same PR as the code/README change it documents. Don't wait to be asked.
+
+If the relevant section is already covered but slightly out of date, edit in place rather than adding a new bullet. Preserve brevity: this file is useful only while it stays scannable.
+
 ## What this repo is
 
 A CSL 1.0 note-style **citation style** for Zotero implementing Bluebook legal citations, with customizations by Prof. Daniel Epps (Washington University School of Law). The code artifact is the `.csl` XML file; the README is the user-facing manual.
