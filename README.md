@@ -63,14 +63,17 @@ A few principles that apply across every item type. Read these once — they'll 
   - Later reference to a non-case → `AUTHOR, *supra* note N, at X`
   - Later reference to a case → Rule 10.9 short form: `*Brown*, 347 U.S. at 495`
 - **The style renders what's in the data — it doesn't look anything up.** If an output is wrong, check the Zotero fields on the item first. The style doesn't validate that `347 U.S. 483` exists or that a journal volume makes sense — it simply formats whatever you typed.
-- **Journal and reporter abbreviations come from Zotero, not this style.** Whether *Harvard Law Review* becomes `Harv. L. Rev.` depends on Zotero's journal-abbreviation setting (Preferences → Cite → *Use MEDLINE journal abbreviations* or a custom abbreviation file). If an abbreviation is wrong, configure it in Zotero — not here.
-- **Signals are handled by a separate plug-in.** *See*, *See also*, *Cf.*, *But see*, *Contra*, etc. are inserted by **[danepps/zotero](https://github.com/danepps/zotero)** — install that alongside this style if you cite with signals.
+- **Journal abbreviations come from each item's `Journal Abbr` field.** The style reads the Bluebook-style abbreviation directly from the **Journal Abbr** field on the Zotero item (e.g., `Harv. L. Rev.`, `Yale L.J.`, `Stan. L. Rev.`). You must fill this in on every journal article when you create the item — there is no central list, and the style does not compute it from the full journal name. **Do not enable Zotero's MEDLINE abbreviation setting** (Preferences → Cite) — MEDLINE uses a different abbreviation scheme (biomedical, no periods) that is not Bluebook-compliant.
+- **Signals are handled by a separate plug-in.** *See*, *See also*, *Cf.*, *But see*, *Contra*, etc. are inserted by **[danepps/zotero](https://github.com/danepps/zotero)** — install that alongside this style if you cite with signals. You **can** type signals manually into the footnote text (or into Zotero's **Prefix** field) instead of using the plug-in, but there's a catch: Bluebook wants `id.` lowercase when it follows a signal (`See id.` at 5, not `See Id.` at 5). The style only knows to drop the capital when the signal is supplied through the plug-in or the Prefix field — a signal you type directly into the Word document leaves the style thinking `Id.` starts a new sentence, and it will be capitalized. Using the plug-in (or, failing that, the Prefix field) is the only way to get signal-then-`id.` rendered correctly.
 - **Short Title controls the short form.** For books, articles, and cases, the Zotero **Short Title** field (or the CSL `title-short` variable) determines how the shortened name appears in subsequent citations. Fill it in for cleaner *supra* and short-form cites.
+- **Explanatory parentheticals go in manually, per cite.** Bluebook often wants a parenthetical after a source (e.g., `(holding that ...)`, `(noting that ...)`, `(per curiam)`). This style doesn't generate those — add them by hand using Zotero's "Suffix" field in the Add/Edit Citation dialog. In a **string cite where each source has its own parenthetical**, it's easiest to insert each source as its own separate citation rather than combining them into one multi-source cite — that way each source gets its own suffix, and semicolons and signals are easier to control.
 
-### Intentional deviations from standard Bluebook
+### Changes from the base CSL Bluebook style
 
-- **`et al.` at 5 authors**, not the Bluebook default of 3 (Rule 15.1/16.1). A personal preference of the author.
-- **No trailing period**, as noted above. Standard Bluebook citations end in a period; this style expects you to add it in context.
+These aren't disagreements with the Bluebook — they're tweaks to the underlying CSL to make it render more cleanly in practice.
+
+- **No trailing period.** The base style emits a period at the end of each citation. That interferes with chained footnote cites (where multiple sources are joined with semicolons, and the period belongs to the footnote sentence, not to any single cite). This style drops the trailing period and expects you to add it in context.
+- **`et al.` at 5 authors**, not 3. A personal preference of the author — the 3-author threshold produces a lot of `X et al.` in footnotes where spelling out all three would read better.
 
 ---
 
@@ -90,7 +93,8 @@ Bluebook requires different output for different kinds of sources. The style ren
 | | Item Type | `Journal Article` | |
 | 🔴 | Author | `Jane Doe` | `Jane Doe` |
 | 🔴 | Title | `Why the Bluebook` | *Why the Bluebook* |
-| 🔴 | Publication | `Harvard Law Review` | Harv. L. Rev. (small caps, via Zotero's journal-abbreviation logic) |
+| 🔴 | Publication | `Harvard Law Review` | (full name — used as a fallback if Journal Abbr is blank) |
+| 🔴 | Journal Abbr | `Harv. L. Rev.` | Harv. L. Rev. (small caps) |
 | 🔴 | Volume | `137` | `137` |
 | 🔴 | Pages | `101` | used as first page |
 | 🔴 | Date | `2024` | `(2024)` |
@@ -196,6 +200,8 @@ Item Type `Case`.
 
 > Fill the **Short Title** field on the case (e.g., `Brown`) to control how the short name appears.
 
+> **Cases aren't the style's strong suit.** Bluebook's Rule 10.9 "five-footnote rule" — use a short form only if the full cite appears in the same footnote or one of the preceding five footnotes, otherwise re-cite in full — cannot be implemented in CSL, because the style has no way to count footnote distance (see the known limitation below). The style will short-form every subsequent case cite, even ones that are 30 footnotes downstream. The author typically **enters cases and case short forms manually** in the footnote text rather than through Zotero, and that is a reasonable workflow if precise case-citation behavior matters to you.
+
 ### Report (government, institutional, Rule 15)
 
 Item Type `Report`. 🔴 Required: Institution, Title, Date. ⚪ Report Number. (The **Institution** field is Zotero's label for the publisher on this type.) Institution and title render in small caps.
@@ -240,6 +246,12 @@ Lowercase keys are the convention; Zotero's parser is actually case-insensitive,
 - **No introductory signals.** *See*, *Cf.*, *But see*, etc. are produced by a separate Zotero plug-in, not this style.
 - **Limited statute / regulation coverage.** The style is primarily tuned for cases, books, journal articles, working papers, and internet sources.
 - **Bibliography rendering is approximate.** The style targets law-review footnotes (note-style). If you ask Zotero to build a bibliography/works-cited list, it will produce something reasonable but not a Bluebook Table of Authorities.
+- **No `[hereinafter shortname]` support.** Bluebook lets authors coin a custom short form on first citation (e.g., `[hereinafter Reimagining]`) and then use that short form on every subsequent cite. CSL has no native concept of author-defined short forms, so the style can't generate the `[hereinafter …]` marker or honor it on subsequent cites.
+- **Can't detect "volume number is a year."** When a journal's volume *is* a year (e.g., `2024 Wis. L. Rev. 501`), Bluebook suppresses the redundant trailing `(2024)`. This style renders both (`2024 Wis. L. Rev. 501 (2024)`), because CSL can't introspect the volume to tell whether it looks like a year.
+- **Can't detect "title ends in a numeral."** When a book or report title ends in a number (e.g., *Article III* at 45), Bluebook requires the pincite be written `, at 45` to avoid running the two numbers together. This style just emits the page number, so you may get ambiguous output like `ARTICLE III 45`.
+- **Cases: no five-footnote rule.** Bluebook Rule 10.9 says a short-form case cite (`*Brown*, 347 U.S. at 495`) may be used only if the full cite appears in the same footnote or one of the preceding five footnotes — otherwise, cite in full again. CSL has no notion of footnote distance, so this style will short-form *every* subsequent case cite, no matter how far back the full cite was. For precise case-citation behavior, many authors (including this one) enter cases and case short forms manually in the footnote text rather than via Zotero.
+
+> **Coming later.** Several of these gaps (hereinafter, volume-as-year, title-ends-in-numeral) are on the roadmap for the companion Zotero plug-in — see **[danepps/zotero](https://github.com/danepps/zotero)**. The plug-in can introspect the data and post-process citation output in ways that a pure CSL file cannot.
 
 ---
 
