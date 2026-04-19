@@ -57,6 +57,8 @@ If you care about knowing when to update, go to the [GitHub repository](https://
 
 See what changed between versions in the [commit history](https://github.com/danepps/bluebook/commits/main) or on the [Releases page](https://github.com/danepps/bluebook/releases).
 
+> **Early adopter migration note.** If you installed an older version of this style (before the move to the GitHub Pages URL), your installed copy has a different internal `<id>` than the current file. Trying to install the new one on top will produce a generic "unexpected error" in Zotero. To migrate: in **Preferences → Cite → Styles**, delete the existing "Bluebook Style — Epps Version" entry and then install the new file. One-time only — after that, updates show the normal "Update existing style?" prompt.
+
 ---
 
 ## How the style works (things everyone should know)
