@@ -89,7 +89,7 @@
   </macro>
   <macro name="access">
     <choose>
-      <if type="webpage post-weblog" match="any">
+      <if type="webpage post-weblog article" match="any">
         <choose>
           <if variable="URL">
             <group delimiter=" ">
@@ -143,19 +143,40 @@
         </group>
       </else-if>
 <else-if type="article">
-  <group>
-    <text variable="title" font-style="italic"/>
-    <text variable="locator" prefix=" "/>
-    <group prefix=" (" suffix=")">
-    <group delimiter=", ">
-      <text variable="collection-title"/>
-      <text variable="collection-number"/>
-      <date variable="issued" form="text">
-        <date-part name="year"/>
-      </date>
+  <choose>
+    <if variable="container-title">
+      <group delimiter=" ">
+        <group delimiter=", ">
+          <text variable="title" font-style="italic"/>
+          <group delimiter=" ">
+            <text variable="volume"/>
+            <text variable="container-title" form="short" font-variant="small-caps"/>
+          </group>
+        </group>
+        <group prefix="(" suffix=")" delimiter=" ">
+          <text value="forthcoming"/>
+          <date variable="issued">
+            <date-part name="year"/>
+          </date>
+        </group>
       </group>
-    </group>
-  </group>
+    </if>
+    <else>
+      <group>
+        <text variable="title" font-style="italic"/>
+        <text variable="locator" prefix=" "/>
+        <group prefix=" (" suffix=")">
+          <group delimiter=", ">
+            <text variable="collection-title"/>
+            <text variable="collection-number"/>
+            <date variable="issued" form="text">
+              <date-part name="year"/>
+            </date>
+          </group>
+        </group>
+      </group>
+    </else>
+  </choose>
 </else-if>
 <else-if type="report">
   <group>
