@@ -8,14 +8,11 @@ This page is also published at **<https://danepps.github.io/bluebook/>**.
 
 ## What you get
 
-Two versions of the style:
+One CSL style file, installable in Zotero:
 
 | Style | File | Install URL |
 | ----- | ---- | ----------- |
-| **Main** (stable) | `BluebookDSEStyle.csl` | <https://danepps.github.io/bluebook/BluebookDSEStyle.csl> |
-| **Experimental** (work-in-progress fixes) | `BluebookDSEStyle-Experimental.csl` | <https://danepps.github.io/bluebook/BluebookDSEStyle-Experimental.csl> |
-
-Both can live side-by-side in Zotero — they have distinct titles.
+| **Bluebook Style — Epps Version** | `BluebookDSEStyle.csl` | <https://danepps.github.io/bluebook/BluebookDSEStyle.csl> |
 
 > **Note on signals.** Bluebook introductory signals (*See*, *See also*, *Cf.*, *But see*, etc.) are **not** produced by this style. They are inserted by a companion Zotero plug-in: **[danepps/zotero](https://github.com/danepps/zotero)** — install that alongside this style if you use signals.
 
@@ -44,7 +41,7 @@ The Zotero plug-ins for Word, LibreOffice, and Google Docs pick up the style aut
 Zotero only auto-updates styles installed from the [official CSL repository](https://www.zotero.org/styles). This style is not there — so updates are **manual**:
 
 1. **Preferences → Cite → Styles.**
-2. Select the existing "Bluebook Style — Epps Version" (or "…Experimental") entry and click **−** to remove it.
+2. Select the existing "Bluebook Style — Epps Version" entry and click **−** to remove it.
 3. Re-install from the URL above.
 
 If you care about knowing when to update, go to the [GitHub repository](https://github.com/danepps/bluebook) and **Watch** it (top-right of that page → *Watch → Custom → Releases*). Each notable change is tagged, and you'll get an email.
