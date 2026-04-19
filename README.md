@@ -78,19 +78,22 @@ A few principles that apply across every item type. Read these once — they'll 
 
 Bluebook requires different output for different kinds of sources. The style renders based on the Zotero **Item Type** and a few specific fields. Below is a type-by-type guide.
 
-> **Convention:** *italic* = should appear italicized in output; SMALL CAPS = should appear in small caps.
+> **Conventions in the tables below:**
+> - *italic* = should appear italicized in output; SMALL CAPS = should appear in small caps.
+> - 🔴 = **required** for a correct citation — leave it blank and the output will be broken or missing a piece.
+> - ⚪ = **optional** — the field adds detail or triggers an alternate rendering, but can be left blank.
 
 ### Journal article
 
-| Zotero field | Example | Renders as |
-| ------------ | ------- | ---------- |
-| Item Type | `Journal Article` | |
-| Author | `Jane Doe` | `Jane Doe` |
-| Title | `Why the Bluebook` | *Why the Bluebook* |
-| Publication | `Harvard Law Review` | Harv. L. Rev. (small caps, via Zotero's journal-abbreviation logic) |
-| Volume | `137` | `137` |
-| Pages | `101` | used as first page |
-| Date | `2024` | `(2024)` |
+| | Zotero field | Example | Renders as |
+| - | ------------ | ------- | ---------- |
+| | Item Type | `Journal Article` | |
+| 🔴 | Author | `Jane Doe` | `Jane Doe` |
+| 🔴 | Title | `Why the Bluebook` | *Why the Bluebook* |
+| 🔴 | Publication | `Harvard Law Review` | Harv. L. Rev. (small caps, via Zotero's journal-abbreviation logic) |
+| 🔴 | Volume | `137` | `137` |
+| 🔴 | Pages | `101` | used as first page |
+| 🔴 | Date | `2024` | `(2024)` |
 
 **Typical output:** `Jane Doe, *Why the Bluebook*, 137 Harv. L. Rev. 101 (2024).`
 
@@ -102,7 +105,7 @@ Use Item Type `Journal Article` exactly as above, **plus** add a `status` line t
 status: forthcoming
 ```
 
-Optionally fill in **URL** with the SSRN or repository link. The style will render:
+🔴 The `status:` line is what triggers the forthcoming rendering. ⚪ Fill in **URL** with the SSRN or repository link — it will now be rendered (URLs are otherwise suppressed for normal journal articles). Volume and Pages become optional in this mode. The style will render:
 
 `Jane Doe, *Why the Bluebook*, 137 Harv. L. Rev. (forthcoming 2027), https://papers.ssrn.com/...`
 
@@ -112,14 +115,14 @@ You can also write `status: accepted`, `status: in press`, etc. — whatever you
 
 Use Item Type `Preprint` (which maps to CSL `article`). Preprint was introduced in **Zotero 7** and is present in Zotero 8; on Zotero 6 it doesn't exist — use `Document` or `Report` instead and expect rougher output.
 
-| Field | Example |
-| ----- | ------- |
-| Author | `Jane Doe` |
-| Title | `Draft Paper` |
-| **Series** | `NBER Working Paper` |
-| **Series Number** | `12345` |
-| Date | `2025` |
-| URL | SSRN/NBER link |
+| | Field | Example |
+| - | ----- | ------- |
+| 🔴 | Author | `Jane Doe` |
+| 🔴 | Title | `Draft Paper` |
+| 🔴 | **Series** | `NBER Working Paper` |
+| 🔴 | **Series Number** | `12345` |
+| 🔴 | Date | `2025` |
+| ⚪ | URL | SSRN/NBER link |
 
 **Output:** `Jane Doe, *Draft Paper* (NBER Working Paper No. 12345, 2025), https://...`
 
@@ -129,7 +132,7 @@ Use Item Type `Preprint` (which maps to CSL `article`). Preprint was introduced 
 
 ### Newspaper article
 
-Item Type `Newspaper Article`. The style switches form based on which fields you fill:
+Item Type `Newspaper Article`. 🔴 Required: Author, Title, Publication, Date. The style switches form based on whether Pages and/or URL are filled:
 
 | Has Pages? | Has URL? | Output |
 | ---------- | -------- | ------ |
@@ -146,29 +149,29 @@ Same rules as newspaper (Item Type `Magazine Article`).
 
 Item Type `Web Page`.
 
-| Field | Notes |
-| ----- | ----- |
-| Website Title | *required* — renders as the italic/small-caps container name, e.g., *Divided Argument* |
-| Title | the specific page/post title (italic) |
-| URL | *required* |
-| Date | publication date (optional) |
-| Accessed | fill this to add `(last visited Mon. D, YYYY)` — **only** Webpages get "last visited" |
+| | Field | Notes |
+| - | ----- | ----- |
+| 🔴 | Website Title | renders as the italic container name, e.g., *Divided Argument* |
+| 🔴 | Title | the specific page/post title (italic) |
+| 🔴 | URL | the page's address |
+| ⚪ | Date | publication date |
+| ⚪ | Accessed | fill this to add `(last visited Mon. D, YYYY)` — **only** Webpages get "last visited" |
 
 **Output with Accessed:** `Author, *Page Title*, *Website Title* (Jan. 27, 2025), https://... (last visited Apr. 10, 2026).`
 
 ### Blog post
 
-Item Type `Blog Post` (CSL `post-weblog`). Like a webpage, but the style **does not** add "last visited" (blog posts carry their own publication date).
+Item Type `Blog Post` (CSL `post-weblog`). Like a webpage, but the style **does not** add "last visited" (blog posts carry their own publication date). 🔴 Required: Author, Title, Blog Title, URL, Date.
 
 ### Book
 
-Item Type `Book`. Author and title render in **small caps** per Rule 15.
+Item Type `Book`. Author and title render in **small caps** per Rule 15. 🔴 Required: Author, Title, Date. ⚪ Edition, Editor/Translator (added to parenthetical if present).
 
 **Output:** `JANE DOE, THE TREATISE 101 (2024).`
 
 ### Book chapter / paper in a book
 
-Item Type `Book Section` (Zotero) maps to CSL `chapter`.
+Item Type `Book Section` (Zotero) maps to CSL `chapter`. 🔴 Required: Author, Title (chapter), Book Title, Date. ⚪ Editor (adds the `ed.` parenthetical).
 
 **Output:** `Jane Doe, *Chapter Title*, in SOME EDITED VOLUME 101 (Bob Smith ed., 2024).`
 
@@ -176,14 +179,14 @@ Item Type `Book Section` (Zotero) maps to CSL `chapter`.
 
 Item Type `Case`.
 
-| Field | Example |
-| ----- | ------- |
-| Case Name | `Brown v. Board of Education` |
-| Reporter | `U.S.` |
-| Reporter Volume | `347` |
-| First Page | `483` |
-| Court | (leave blank for U.S. Supreme Court; otherwise court name) |
-| Date Decided | `1954` |
+| | Field | Example |
+| - | ----- | ------- |
+| 🔴 | Case Name | `Brown v. Board of Education` |
+| 🔴 | Reporter | `U.S.` |
+| 🔴 | Reporter Volume | `347` |
+| 🔴 | First Page | `483` |
+| ⚪ | Court | (leave blank for U.S. Supreme Court; otherwise court name) |
+| 🔴 | Date Decided | `1954` |
 
 **First citation:** `Brown v. Board of Education, 347 U.S. 483 (1954).`
 
@@ -195,7 +198,7 @@ Item Type `Case`.
 
 ### Report (government, institutional, Rule 15)
 
-Item Type `Report`. Fill the **Institution** field (which is Zotero's label for the publisher on this type) plus Title, Date, and optional Report Number. Institution and title render in small caps.
+Item Type `Report`. 🔴 Required: Institution, Title, Date. ⚪ Report Number. (The **Institution** field is Zotero's label for the publisher on this type.) Institution and title render in small caps.
 
 `U.S. DEP'T OF JUSTICE, ANNUAL REPORT 12 (2024).`
 
