@@ -85,26 +85,28 @@ You can also write `status: accepted`, `status: in press`, etc. — whatever you
 
 ### Preprint / working paper
 
-Use Item Type `Preprint` (which maps to CSL `article`):
+Use Item Type `Preprint` (which maps to CSL `article`). Preprint is only available in **Zotero 7**; on Zotero 6 use `Document` or `Report` and expect rougher output.
 
 | Field | Example |
 | ----- | ------- |
 | Author | `Jane Doe` |
 | Title | `Draft Paper` |
-| Repository (or Series) | `NBER Working Paper` |
-| Archive ID (or Series Number) | `12345` |
+| **Series** | `NBER Working Paper` |
+| **Series Number** | `12345` |
 | Date | `2025` |
 | URL | SSRN/NBER link |
 
 **Output:** `Jane Doe, *Draft Paper* (NBER Working Paper No. 12345, 2025), https://...`
 
-> *Zotero fields:* "Repository" and "Archive ID" on a Preprint map to CSL `collection-title` and `collection-number`. The style automatically adds `No.` before the number.
+> *Zotero fields:* use **Series** and **Series Number** (which map to CSL `collection-title` / `collection-number`) — *not* "Repository" / "Archive ID", which map elsewhere. The style automatically inserts `No.` before the number.
 
-### Preprint that has been accepted for publication
+### Paper that has been accepted for publication
 
-Preprint Item Type, plus `status: forthcoming` in Extra (and add the forthcoming journal in **Publication**):
+If your paper is going to / has been accepted by a journal — even if the draft lives on SSRN — use **`Journal Article`** (not Preprint), set **Publication** to the journal name, and add `status: forthcoming` to Extra. Put the SSRN URL in the URL field.
 
 `Jane Doe, *Draft Paper*, 138 Yale L.J. (forthcoming 2027), https://ssrn...`
+
+Preprint is only the right type for pure working papers that are *not* tied to an upcoming journal issue (think NBER series papers, unplaced drafts, etc.).
 
 ### Newspaper article
 
@@ -174,7 +176,7 @@ Item Type `Case`.
 
 ### Report (government, institutional, Rule 15)
 
-Item Type `Report`. Publisher and title render in small caps.
+Item Type `Report`. Fill the **Institution** field (which is Zotero's label for the publisher on this type) plus Title, Date, and optional Report Number. Institution and title render in small caps.
 
 `U.S. DEP'T OF JUSTICE, ANNUAL REPORT 12 (2024).`
 
@@ -195,7 +197,7 @@ Zotero's **Extra** field lets you override or add CSL variables that aren't in t
 | `event-title: ...` | Override conference/event title |
 | `number-of-pages: ...` | For books |
 
-The `key:` must be lowercase; the value can be anything.
+Lowercase keys are the convention; Zotero's parser is actually case-insensitive, so `Status: forthcoming` works too. Whitespace around the colon is tolerated.
 
 ---
 
