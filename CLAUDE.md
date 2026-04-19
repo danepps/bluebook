@@ -67,6 +67,24 @@ Don't try to implement these in pure CSL. Point users at the plug-in instead.
 
 Route to **email Prof. Epps at <epps@wustl.edu>**, not GitHub issues.
 
+## Current status (April 2026)
+
+The style and its surrounding infrastructure are **stable and shipped**. As of the latest session:
+
+- **CSL is production-ready.** All known code-review fixes applied (Rule 10.9 italic short-form, URL-emission gated by item type, newspaper/magazine page-vs-URL decision matrix, forthcoming-journal via `status`, webpage-only "last visited", dead `report` branch removed, `<bibliography>` element added).
+- **Distribution is live.** GitHub Pages serves `https://danepps.github.io/bluebook/BluebookDSEStyle.csl` as the canonical install URL. `bump-updated.yml` auto-rewrites `<updated>` on every CSL push to `main`.
+- **README is comprehensive.** Intro + Zotero onboarding, install (Zotero 7/8, Word/Docs plug-in note, "Zotero must be running"), updating (manual reinstall + early-adopter migration note for old `raw.githubusercontent.com` installs), "How the style works" principles, per-item-type data-entry guide with 🔴/⚪ required/optional convention, Extra-field cheat sheet, subsequent-citation table, known limitations, email for bug reports.
+- **Out-of-scope items** (hereinafter, volume-as-year, title-ends-in-numeral, five-footnote rule, signals) are documented as delegated to `danepps/zotero`.
+
+**Nice-to-have follow-ups** (not urgent, no one asked for them):
+
+- Type-specific rendering for `statute` / `bill` / `regulation` — currently falls through to generic output.
+- Verify webpage-author fallback (using site name when author is blank) matches Bluebook Rule 18.
+- Start cutting tagged releases (`v1.0`, …) so the README's "Watch → Releases" path actually notifies subscribers.
+- Bibliography/Table-of-Authorities tuning — output is "approximate" today; fine for law-review footnote workflow but not a true ToA.
+
+Update this section when any of the above ships, or when a new batch of work materially changes what's running in production.
+
 ## Things to double-check before releasing a CSL change
 
 - `xmllint --noout BluebookDSEStyle.csl` is clean.
