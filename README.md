@@ -3,7 +3,15 @@
 A CSL 1.0 note-style citation format implementing Bluebook legal citations, with
 customizations by Prof. Daniel Epps (Washington University School of Law).
 
-File: [`BluebookDSEStyle.csl`](BluebookDSEStyle.csl)
+Files in this repo:
+
+- [`BluebookDSEStyle.csl`](BluebookDSEStyle.csl) — the main style
+  (**Bluebook Style — Epps Version**).
+- [`BluebookDSEStyle-Experimental.csl`](BluebookDSEStyle-Experimental.csl) —
+  a parallel copy (**Bluebook Style — Epps Version (Experimental)**) for
+  testing proposed changes side-by-side with the main style. It has a
+  distinct CSL `id` and title, so Zotero treats it as a separate entry; both
+  can be installed at the same time.
 
 ## Install
 
@@ -18,6 +26,16 @@ Pandoc or Mendeley):
    ```
    https://danepps.github.io/bluebook/BluebookDSEStyle.csl
    ```
+
+To install the experimental copy alongside the main style (for testing), use
+either the local file or this URL:
+
+```
+https://danepps.github.io/bluebook/BluebookDSEStyle-Experimental.csl
+```
+
+Because the experimental file has a different CSL `id` and title, Zotero lists
+it as a separate entry — installing it does not replace the main style.
 
 ## Updating
 

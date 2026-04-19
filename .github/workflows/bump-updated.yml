@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - BluebookDSEStyle.csl
+      - BluebookDSEStyle-Experimental.csl
 
 permissions:
   contents: write
@@ -18,19 +19,30 @@ jobs:
         with:
           ref: main
 
-      - name: Rewrite <updated> to current UTC time
+      - name: Rewrite <updated> in any CSL that changed in this push
         run: |
           NOW="$(date -u +'%Y-%m-%dT%H:%M:%S+00:00')"
-          sed -i -E "s|<updated>[^<]*</updated>|<updated>${NOW}</updated>|" BluebookDSEStyle.csl
+          CHANGED=$(git diff --name-only "${{ github.event.before }}" "${{ github.sha }}" -- '*.csl' || true)
+          if [ -z "$CHANGED" ]; then
+            echo "No CSL files changed in this push; nothing to do."
+            exit 0
+          fi
+          echo "Changed CSL files:"
+          echo "$CHANGED"
+          for f in $CHANGED; do
+            if [ -f "$f" ]; then
+              sed -i -E "s|<updated>[^<]*</updated>|<updated>${NOW}</updated>|" "$f"
+            fi
+          done
 
       - name: Commit and push if changed
         run: |
-          if git diff --quiet -- BluebookDSEStyle.csl; then
+          if git diff --quiet -- '*.csl'; then
             echo "No change to <updated>; nothing to commit."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add BluebookDSEStyle.csl
+          git add '*.csl'
           git commit -m "chore: bump CSL <updated> timestamp [skip ci]"
           git push origin main
