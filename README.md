@@ -17,13 +17,15 @@ Two versions of the style:
 
 Both can live side-by-side in Zotero — they have distinct titles.
 
-> **Note on signals.** Bluebook introductory signals (*See*, *See also*, *Cf.*, *But see*, etc.) are **not** produced by this style. They are inserted by a separate Zotero plug-in; keep that plug-in installed if you use signals.
+> **Note on signals.** Bluebook introductory signals (*See*, *See also*, *Cf.*, *But see*, etc.) are **not** produced by this style. They are inserted by a companion Zotero plug-in: **[danepps/zotero](https://github.com/danepps/zotero)** — install that alongside this style if you use signals.
 
 ---
 
 ## Install
 
-### Zotero 6 / 7 (desktop)
+### Zotero (desktop)
+
+Works with Zotero 7 and Zotero 8. (On Zotero 6 the style mostly works, but the **Preprint** item type doesn't exist — see the Preprint section below for the workaround.)
 
 1. Open **Preferences → Cite → Styles**.
 2. Click the **+** button in the lower left.
@@ -45,7 +47,7 @@ Zotero only auto-updates styles installed from the [official CSL repository](htt
 2. Select the existing "Bluebook Style — Epps Version" (or "…Experimental") entry and click **−** to remove it.
 3. Re-install from the URL above.
 
-If you care about knowing when to update, **Watch** this GitHub repo (top-right → *Watch → Custom → Releases*) — each notable change is tagged, and you'll get an email.
+If you care about knowing when to update, go to the [GitHub repository](https://github.com/danepps/bluebook) and **Watch** it (top-right of that page → *Watch → Custom → Releases*). Each notable change is tagged, and you'll get an email.
 
 ---
 
@@ -85,26 +87,22 @@ You can also write `status: accepted`, `status: in press`, etc. — whatever you
 
 ### Preprint / working paper
 
-Use Item Type `Preprint` (which maps to CSL `article`):
+Use Item Type `Preprint` (which maps to CSL `article`). Preprint was introduced in **Zotero 7** and is present in Zotero 8; on Zotero 6 it doesn't exist — use `Document` or `Report` instead and expect rougher output.
 
 | Field | Example |
 | ----- | ------- |
 | Author | `Jane Doe` |
 | Title | `Draft Paper` |
-| Repository (or Series) | `NBER Working Paper` |
-| Archive ID (or Series Number) | `12345` |
+| **Series** | `NBER Working Paper` |
+| **Series Number** | `12345` |
 | Date | `2025` |
 | URL | SSRN/NBER link |
 
 **Output:** `Jane Doe, *Draft Paper* (NBER Working Paper No. 12345, 2025), https://...`
 
-> *Zotero fields:* "Repository" and "Archive ID" on a Preprint map to CSL `collection-title` and `collection-number`. The style automatically adds `No.` before the number.
+> *Zotero fields:* use **Series** and **Series Number** (which map to CSL `collection-title` / `collection-number`) — *not* "Repository" / "Archive ID", which map elsewhere. The style automatically inserts `No.` before the number.
 
-### Preprint that has been accepted for publication
-
-Preprint Item Type, plus `status: forthcoming` in Extra (and add the forthcoming journal in **Publication**):
-
-`Jane Doe, *Draft Paper*, 138 Yale L.J. (forthcoming 2027), https://ssrn...`
+> **Not sure which type to use for a draft?** If the paper has been placed with a journal (even just accepted), use **Journal Article** with `status: forthcoming` (see the *Forthcoming journal article* section above). Use **Preprint** only for pure working papers that aren't tied to an upcoming journal issue — NBER series papers, unplaced drafts, etc.
 
 ### Newspaper article
 
@@ -174,7 +172,7 @@ Item Type `Case`.
 
 ### Report (government, institutional, Rule 15)
 
-Item Type `Report`. Publisher and title render in small caps.
+Item Type `Report`. Fill the **Institution** field (which is Zotero's label for the publisher on this type) plus Title, Date, and optional Report Number. Institution and title render in small caps.
 
 `U.S. DEP'T OF JUSTICE, ANNUAL REPORT 12 (2024).`
 
@@ -195,7 +193,7 @@ Zotero's **Extra** field lets you override or add CSL variables that aren't in t
 | `event-title: ...` | Override conference/event title |
 | `number-of-pages: ...` | For books |
 
-The `key:` must be lowercase; the value can be anything.
+Lowercase keys are the convention; Zotero's parser is actually case-insensitive, so `Status: forthcoming` works too. Whitespace around the colon is tolerated.
 
 ---
 
