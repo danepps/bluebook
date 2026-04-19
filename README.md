@@ -200,6 +200,8 @@ Item Type `Case`.
 
 > Fill the **Short Title** field on the case (e.g., `Brown`) to control how the short name appears.
 
+> **Cases aren't the style's strong suit.** Bluebook's Rule 10.9 "five-footnote rule" — use a short form only if the full cite appears in the same footnote or one of the preceding five footnotes, otherwise re-cite in full — cannot be implemented in CSL, because the style has no way to count footnote distance (see the known limitation below). The style will short-form every subsequent case cite, even ones that are 30 footnotes downstream. The author typically **enters cases and case short forms manually** in the footnote text rather than through Zotero, and that is a reasonable workflow if precise case-citation behavior matters to you.
+
 ### Report (government, institutional, Rule 15)
 
 Item Type `Report`. 🔴 Required: Institution, Title, Date. ⚪ Report Number. (The **Institution** field is Zotero's label for the publisher on this type.) Institution and title render in small caps.
@@ -247,6 +249,7 @@ Lowercase keys are the convention; Zotero's parser is actually case-insensitive,
 - **No `[hereinafter shortname]` support.** Bluebook lets authors coin a custom short form on first citation (e.g., `[hereinafter Reimagining]`) and then use that short form on every subsequent cite. CSL has no native concept of author-defined short forms, so the style can't generate the `[hereinafter …]` marker or honor it on subsequent cites.
 - **Can't detect "volume number is a year."** When a journal's volume *is* a year (e.g., `2024 Wis. L. Rev. 501`), Bluebook suppresses the redundant trailing `(2024)`. This style renders both (`2024 Wis. L. Rev. 501 (2024)`), because CSL can't introspect the volume to tell whether it looks like a year.
 - **Can't detect "title ends in a numeral."** When a book or report title ends in a number (e.g., *Article III* at 45), Bluebook requires the pincite be written `, at 45` to avoid running the two numbers together. This style just emits the page number, so you may get ambiguous output like `ARTICLE III 45`.
+- **Cases: no five-footnote rule.** Bluebook Rule 10.9 says a short-form case cite (`*Brown*, 347 U.S. at 495`) may be used only if the full cite appears in the same footnote or one of the preceding five footnotes — otherwise, cite in full again. CSL has no notion of footnote distance, so this style will short-form *every* subsequent case cite, no matter how far back the full cite was. For precise case-citation behavior, many authors (including this one) enter cases and case short forms manually in the footnote text rather than via Zotero.
 
 > **Coming later.** Several of these gaps (hereinafter, volume-as-year, title-ends-in-numeral) are on the roadmap for the companion Zotero plug-in — see **[danepps/zotero](https://github.com/danepps/zotero)**. The plug-in can introspect the data and post-process citation output in ways that a pure CSL file cannot.
 
