@@ -91,15 +91,19 @@
     <group delimiter=" ">
       <text variable="URL"/>
       <choose>
-        <if variable="accessed">
-          <group delimiter=" " prefix="(" suffix=")">
-            <text value="last visited"/>
-            <date variable="accessed">
-              <date-part name="month" form="short" suffix=" " strip-periods="true"/>
-              <date-part name="day" suffix=", "/>
-              <date-part name="year"/>
-            </date>
-          </group>
+        <if type="webpage">
+          <choose>
+            <if variable="accessed">
+              <group delimiter=" " prefix="(" suffix=")">
+                <text value="last visited"/>
+                <date variable="accessed">
+                  <date-part name="month" form="short" suffix=" " strip-periods="true"/>
+                  <date-part name="day" suffix=", "/>
+                  <date-part name="year"/>
+                </date>
+              </group>
+            </if>
+          </choose>
         </if>
       </choose>
     </group>
@@ -108,7 +112,7 @@
     <choose>
       <if variable="URL">
         <choose>
-          <if type="webpage post-weblog article" match="any">
+          <if type="webpage post-weblog article article-newspaper article-magazine" match="any">
             <text macro="url-with-accessed"/>
           </if>
           <else-if type="article-journal" match="any">
