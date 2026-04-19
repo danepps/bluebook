@@ -66,6 +66,7 @@ A few principles that apply across every item type. Read these once — they'll 
 - **Journal and reporter abbreviations come from Zotero, not this style.** Whether *Harvard Law Review* becomes `Harv. L. Rev.` depends on Zotero's journal-abbreviation setting (Preferences → Cite → *Use MEDLINE journal abbreviations* or a custom abbreviation file). If an abbreviation is wrong, configure it in Zotero — not here.
 - **Signals are handled by a separate plug-in.** *See*, *See also*, *Cf.*, *But see*, *Contra*, etc. are inserted by **[danepps/zotero](https://github.com/danepps/zotero)** — install that alongside this style if you cite with signals.
 - **Short Title controls the short form.** For books, articles, and cases, the Zotero **Short Title** field (or the CSL `title-short` variable) determines how the shortened name appears in subsequent citations. Fill it in for cleaner *supra* and short-form cites.
+- **Explanatory parentheticals go in manually, per cite.** Bluebook often wants a parenthetical after a source (e.g., `(holding that ...)`, `(noting that ...)`, `(per curiam)`). This style doesn't generate those — add them by hand using Zotero's "Suffix" field in the Add/Edit Citation dialog. In a **string cite where each source has its own parenthetical**, it's easiest to insert each source as its own separate citation rather than combining them into one multi-source cite — that way each source gets its own suffix, and semicolons and signals are easier to control.
 
 ### Intentional deviations from standard Bluebook
 
