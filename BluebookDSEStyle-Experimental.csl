@@ -91,15 +91,19 @@
     <group delimiter=" ">
       <text variable="URL"/>
       <choose>
-        <if variable="accessed">
-          <group delimiter=" " prefix="(" suffix=")">
-            <text value="last visited"/>
-            <date variable="accessed">
-              <date-part name="month" form="short" suffix=" " strip-periods="true"/>
-              <date-part name="day" suffix=", "/>
-              <date-part name="year"/>
-            </date>
-          </group>
+        <if type="webpage">
+          <choose>
+            <if variable="accessed">
+              <group delimiter=" " prefix="(" suffix=")">
+                <text value="last visited"/>
+                <date variable="accessed">
+                  <date-part name="month" form="short" suffix=" " strip-periods="true"/>
+                  <date-part name="day" suffix=", "/>
+                  <date-part name="year"/>
+                </date>
+              </group>
+            </if>
+          </choose>
         </if>
       </choose>
     </group>
@@ -108,7 +112,7 @@
     <choose>
       <if variable="URL">
         <choose>
-          <if type="webpage post-weblog article" match="any">
+          <if type="webpage post-weblog article article-newspaper article-magazine" match="any">
             <text macro="url-with-accessed"/>
           </if>
           <else-if type="article-journal" match="any">
@@ -250,18 +254,32 @@
   </group>
 </else-if>
       <else-if type="article-newspaper article-magazine" match="any">
-        <group delimiter=", ">
-          <text variable="title" font-style="italic"/>
-          <group delimiter=" ">
-            <text variable="volume"/>
-            <text macro="container"/>
-          </group>
-          <text macro="issuance"/>
-          <group delimiter=" ">
-            <text value="at"/>
-            <text variable="page-first"/>
-          </group>
-        </group>
+        <choose>
+          <if variable="URL">
+            <group delimiter=", ">
+              <text variable="title" font-style="italic"/>
+              <group delimiter=" ">
+                <text variable="volume"/>
+                <text macro="container"/>
+                <text macro="issuance" prefix="(" suffix=")"/>
+              </group>
+            </group>
+          </if>
+          <else>
+            <group delimiter=", ">
+              <text variable="title" font-style="italic"/>
+              <group delimiter=" ">
+                <text variable="volume"/>
+                <text macro="container"/>
+              </group>
+              <text macro="issuance"/>
+              <group delimiter=" ">
+                <text value="at"/>
+                <text variable="page-first"/>
+              </group>
+            </group>
+          </else>
+        </choose>
       </else-if>
       <else-if type="chapter paper-conference" match="any">
         <text variable="title" font-style="italic"/>
