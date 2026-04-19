@@ -22,7 +22,7 @@ One CSL style file, installable in Zotero:
 
 ### Zotero (desktop)
 
-Works with Zotero 7 and Zotero 8. (On Zotero 6 the style mostly works, but the **Preprint** item type doesn't exist — see the Preprint section below for the workaround.)
+Works with Zotero 7 through 10. (On Zotero 6 the style mostly works, but the **Preprint** item type doesn't exist — see the Preprint section below for the workaround.)
 
 1. Open **Preferences → Cite → Styles**.
 2. Click the **+** button in the lower left.
