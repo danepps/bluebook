@@ -1,6 +1,6 @@
 # Bluebook Style — Epps Version
 
-A [Bluebook](https://www.legalbluebook.com/) legal-citation style for [Zotero](https://www.zotero.org/), adapted by **Prof. Daniel Epps** (Washington University School of Law) from the community Bluebook CSL style.
+A [Bluebook](https://www.legalbluebook.com/) legal-citation style for [Zotero](https://www.zotero.org/), adapted by **Prof. Daniel Epps** (Washington University School of Law) from the community Bluebook CSL style. (The file is a standard CSL 1.0 style, so it also works in other CSL-compatible processors like Pandoc or Mendeley — but Zotero is the intended and primary target, and the rest of this guide assumes Zotero.)
 
 ---
 
@@ -30,7 +30,7 @@ Works with Zotero 7 through 10. (On Zotero 6 the style mostly works, but the **P
 
 ### Word / Google Docs
 
-The Zotero plug-ins for Word, LibreOffice, and Google Docs pick up the style automatically — once installed in Zotero, choose it from the document-preferences dropdown.
+The Zotero plug-ins for Word, LibreOffice, and Google Docs pick up the style automatically — once installed in Zotero, choose it from the document-preferences dropdown. **Zotero must be running** in the background while you're inserting or editing citations from Word/Docs/LibreOffice; if Zotero is closed, the plug-in buttons do nothing.
 
 ---
 
@@ -43,6 +43,8 @@ Zotero only auto-updates styles installed from the [official CSL repository](htt
 3. Re-install from the URL above.
 
 If you care about knowing when to update, go to the [GitHub repository](https://github.com/danepps/bluebook) and **Watch** it (top-right of that page → *Watch → Custom → Releases*). Each notable change is tagged, and you'll get an email.
+
+See what changed between versions in the [commit history](https://github.com/danepps/bluebook/commits/main) or on the [Releases page](https://github.com/danepps/bluebook/releases).
 
 ---
 
