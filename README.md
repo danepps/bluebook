@@ -51,6 +51,29 @@ If you care about knowing when to update, go to the [GitHub repository](https://
 
 ---
 
+## How the style works (things everyone should know)
+
+A few principles that apply across every item type. Read these once — they'll explain most "why is it doing that?" questions.
+
+- **No trailing period.** Output ends without a final period. In a footnote, type the period yourself; inline, let the surrounding sentence punctuate. This is deliberate — law-review footnotes often chain multiple citations with semicolons, and the sentence-ending period belongs to the footnote, not to any single citation.
+- **Note-style, footnote-oriented.** The style is built for law-review footnote citations, not inline author-date parentheticals. Insert citations with Zotero's "Insert Footnote" (in Word) or equivalent.
+- **Italics and small caps are rich-text formatting.** The style emits *italic* / SMALL CAPS as styled-text attributes. Word, LibreOffice, Google Docs, and Pages render them correctly. Plain-text contexts (Markdown, terminal, some email clients) will show unformatted text.
+- **Short forms are automatic, based on citation position.** The style looks at whether a citation is first or subsequent:
+  - Same source immediately prior → `*Id.*` (with pincite: `*Id.* at 495`)
+  - Later reference to a non-case → `AUTHOR, *supra* note N, at X`
+  - Later reference to a case → Rule 10.9 short form: `*Brown*, 347 U.S. at 495`
+- **The style renders what's in the data — it doesn't look anything up.** If an output is wrong, check the Zotero fields on the item first. The style doesn't validate that `347 U.S. 483` exists or that a journal volume makes sense — it simply formats whatever you typed.
+- **Journal and reporter abbreviations come from Zotero, not this style.** Whether *Harvard Law Review* becomes `Harv. L. Rev.` depends on Zotero's journal-abbreviation setting (Preferences → Cite → *Use MEDLINE journal abbreviations* or a custom abbreviation file). If an abbreviation is wrong, configure it in Zotero — not here.
+- **Signals are handled by a separate plug-in.** *See*, *See also*, *Cf.*, *But see*, *Contra*, etc. are inserted by **[danepps/zotero](https://github.com/danepps/zotero)** — install that alongside this style if you cite with signals.
+- **Short Title controls the short form.** For books, articles, and cases, the Zotero **Short Title** field (or the CSL `title-short` variable) determines how the shortened name appears in subsequent citations. Fill it in for cleaner *supra* and short-form cites.
+
+### Intentional deviations from standard Bluebook
+
+- **`et al.` at 5 authors**, not the Bluebook default of 3 (Rule 15.1/16.1). A personal preference of the author.
+- **No trailing period**, as noted above. Standard Bluebook citations end in a period; this style expects you to add it in context.
+
+---
+
 ## How to enter items in Zotero
 
 Bluebook requires different output for different kinds of sources. The style renders based on the Zotero **Item Type** and a few specific fields. Below is a type-by-type guide.
@@ -205,8 +228,6 @@ Lowercase keys are the convention; Zotero's parser is actually case-insensitive,
 | Later reference to a non-case | `AUTHOR, supra note N, at X` |
 | Later reference to a case | `*Brown*, 347 U.S. at 495` |
 | 5 or more authors | `First Author et al.` |
-
-The 5-author threshold is an intentional deviation from Bluebook Rule 15.1/16.1 (which uses 3). This is a personal preference of the author.
 
 ---
 
