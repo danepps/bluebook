@@ -167,8 +167,10 @@
         <text variable="locator" prefix=" "/>
         <group prefix=" (" suffix=")">
           <group delimiter=", ">
-            <text variable="collection-title"/>
-            <text variable="collection-number"/>
+            <group delimiter=" ">
+              <text variable="collection-title"/>
+              <text variable="collection-number" prefix="No. "/>
+            </group>
             <date variable="issued" form="text">
               <date-part name="year"/>
             </date>
