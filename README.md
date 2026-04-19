@@ -64,14 +64,16 @@ A few principles that apply across every item type. Read these once — they'll 
   - Later reference to a case → Rule 10.9 short form: `*Brown*, 347 U.S. at 495`
 - **The style renders what's in the data — it doesn't look anything up.** If an output is wrong, check the Zotero fields on the item first. The style doesn't validate that `347 U.S. 483` exists or that a journal volume makes sense — it simply formats whatever you typed.
 - **Journal abbreviations come from each item's `Journal Abbr` field.** The style reads the Bluebook-style abbreviation directly from the **Journal Abbr** field on the Zotero item (e.g., `Harv. L. Rev.`, `Yale L.J.`, `Stan. L. Rev.`). You must fill this in on every journal article when you create the item — there is no central list, and the style does not compute it from the full journal name. **Do not enable Zotero's MEDLINE abbreviation setting** (Preferences → Cite) — MEDLINE uses a different abbreviation scheme (biomedical, no periods) that is not Bluebook-compliant.
-- **Signals are handled by a separate plug-in.** *See*, *See also*, *Cf.*, *But see*, *Contra*, etc. are inserted by **[danepps/zotero](https://github.com/danepps/zotero)** — install that alongside this style if you cite with signals.
+- **Signals are handled by a separate plug-in.** *See*, *See also*, *Cf.*, *But see*, *Contra*, etc. are inserted by **[danepps/zotero](https://github.com/danepps/zotero)** — install that alongside this style if you cite with signals. You **can** type signals manually into the footnote text (or into Zotero's **Prefix** field) instead of using the plug-in, but there's a catch: Bluebook wants `id.` lowercase when it follows a signal (`See id.` at 5, not `See Id.` at 5). The style only knows to drop the capital when the signal is supplied through the plug-in or the Prefix field — a signal you type directly into the Word document leaves the style thinking `Id.` starts a new sentence, and it will be capitalized. Using the plug-in (or, failing that, the Prefix field) is the only way to get signal-then-`id.` rendered correctly.
 - **Short Title controls the short form.** For books, articles, and cases, the Zotero **Short Title** field (or the CSL `title-short` variable) determines how the shortened name appears in subsequent citations. Fill it in for cleaner *supra* and short-form cites.
 - **Explanatory parentheticals go in manually, per cite.** Bluebook often wants a parenthetical after a source (e.g., `(holding that ...)`, `(noting that ...)`, `(per curiam)`). This style doesn't generate those — add them by hand using Zotero's "Suffix" field in the Add/Edit Citation dialog. In a **string cite where each source has its own parenthetical**, it's easiest to insert each source as its own separate citation rather than combining them into one multi-source cite — that way each source gets its own suffix, and semicolons and signals are easier to control.
 
-### Intentional deviations from standard Bluebook
+### Changes from the base CSL Bluebook style
 
-- **`et al.` at 5 authors**, not the Bluebook default of 3 (Rule 15.1/16.1). A personal preference of the author.
-- **No trailing period**, as noted above. Standard Bluebook citations end in a period; this style expects you to add it in context.
+These aren't disagreements with the Bluebook — they're tweaks to the underlying CSL to make it render more cleanly in practice.
+
+- **No trailing period.** The base style emits a period at the end of each citation. That interferes with chained footnote cites (where multiple sources are joined with semicolons, and the period belongs to the footnote sentence, not to any single cite). This style drops the trailing period and expects you to add it in context.
+- **`et al.` at 5 authors**, not 3. A personal preference of the author — the 3-author threshold produces a lot of `X et al.` in footnotes where spelling out all three would read better.
 
 ---
 
