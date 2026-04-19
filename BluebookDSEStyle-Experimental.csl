@@ -393,24 +393,38 @@
           <text term="ibid" font-style="italic"/>
         </else-if>
         <else-if position="subsequent">
-          <group delimiter=", ">
-            <group delimiter=" ">
-              <choose>
-                <if type="book" match="any">
+          <choose>
+            <if type="legal_case">
+              <group delimiter=", ">
+                <text macro="author-short"/>
+                <group delimiter=" ">
                   <text variable="volume"/>
-                </if>
-              </choose>
-              <text macro="author-short"/>
-            </group>
-            <group delimiter=" ">
-              <text value="supra" font-style="italic"/>
-              <text value="note"/>
-          <group delimiter=", ">
-              <text variable="first-reference-note-number"/>
-              <text macro="at_page"/>
-</group>
-            </group>
-          </group>
+                  <text variable="container-title" form="short"/>
+                  <text macro="at_page"/>
+                </group>
+              </group>
+            </if>
+            <else>
+              <group delimiter=", ">
+                <group delimiter=" ">
+                  <choose>
+                    <if type="book" match="any">
+                      <text variable="volume"/>
+                    </if>
+                  </choose>
+                  <text macro="author-short"/>
+                </group>
+                <group delimiter=" ">
+                  <text value="supra" font-style="italic"/>
+                  <text value="note"/>
+                  <group delimiter=", ">
+                    <text variable="first-reference-note-number"/>
+                    <text macro="at_page"/>
+                  </group>
+                </group>
+              </group>
+            </else>
+          </choose>
         </else-if>
          <else-if variable="author">
           <group delimiter=", ">
