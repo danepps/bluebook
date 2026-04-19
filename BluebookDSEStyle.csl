@@ -2,8 +2,8 @@
 <style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
     <title>Bluebook Style — Epps Version</title>
-    <id>https://raw.githubusercontent.com/danepps/bluebook/main/BluebookDSEStyle.csl</id>
-    <link href="https://raw.githubusercontent.com/danepps/bluebook/main/BluebookDSEStyle.csl" rel="self"/>
+    <id>https://danepps.github.io/bluebook/BluebookDSEStyle.csl</id>
+    <link href="https://danepps.github.io/bluebook/BluebookDSEStyle.csl" rel="self"/>
     <link href="https://www.legalbluebook.com/" rel="documentation"/>
     <author>
       <name>Bruce D'Arcus</name>
@@ -46,14 +46,7 @@
   <macro name="author-short">
     <choose>
       <if type="legal_case">
-        <choose>
-          <if variable="title-short">
-            <text macro="name-short-macro" font-style="italic"/>
-          </if>
-          <else>
-            <text macro="name-short-macro"/>
-          </else>
-        </choose>
+        <text macro="name-short-macro" font-style="italic"/>
       </if>
       <else-if type="bill legislation" match="any">
         <text macro="name-macro"/>
@@ -94,31 +87,31 @@
       <label form="short" strip-periods="false" prefix=" "/>
     </names>
   </macro>
-<macro name="access">
-  <choose>
-    <if variable="URL">
-      <group delimiter=" ">
-        <text variable="URL"/>
+  <macro name="access">
     <choose>
-      <if type="webpage">
+      <if type="webpage post-weblog" match="any">
         <choose>
-          <if variable="accessed">
-            <group delimiter=" " prefix="(" suffix=")">
-              <text value="last visited"/>
-              <date variable="accessed">
-                <date-part name="month" form="short" suffix=" " strip-periods="true"/>
-                <date-part name="day" suffix=", "/>
-                <date-part name="year"/>
-              </date>
+          <if variable="URL">
+            <group delimiter=" ">
+              <text variable="URL"/>
+              <choose>
+                <if variable="accessed">
+                  <group delimiter=" " prefix="(" suffix=")">
+                    <text value="last visited"/>
+                    <date variable="accessed">
+                      <date-part name="month" form="short" suffix=" " strip-periods="true"/>
+                      <date-part name="day" suffix=", "/>
+                      <date-part name="year"/>
+                    </date>
+                  </group>
+                </if>
+              </choose>
             </group>
           </if>
         </choose>
-           </if>
-        </choose>
-      </group>
-    </if>
-  </choose>
-</macro>
+      </if>
+    </choose>
+  </macro>
 <macro name="source">
     <choose>
       <if type="article-journal" match="any">
@@ -226,7 +219,7 @@
         <text variable="locator" prefix=", "/>
         <text macro="issuance" prefix=" (" suffix=")"/>
       </else-if>
-      <else-if type="book report" match="any">
+      <else-if type="book">
         <text variable="title" font-variant="small-caps"/>
         <text variable="locator" prefix=" "/>
         <text macro="issuance" prefix=" (" suffix=")"/>
@@ -367,4 +360,17 @@
       </choose>
     </layout>
   </citation>
+  <bibliography et-al-min="5" et-al-use-first="1">
+    <sort>
+      <key macro="author"/>
+      <key variable="issued"/>
+    </sort>
+    <layout suffix=".">
+      <group delimiter=", ">
+        <text macro="author"/>
+        <text macro="source"/>
+        <text macro="access"/>
+      </group>
+    </layout>
+  </bibliography>
 </style>

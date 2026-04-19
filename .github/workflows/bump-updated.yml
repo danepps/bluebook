@@ -1,0 +1,36 @@
+name: Bump CSL <updated> timestamp
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - BluebookDSEStyle.csl
+
+permissions:
+  contents: write
+
+jobs:
+  bump:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Rewrite <updated> to current UTC time
+        run: |
+          NOW="$(date -u +'%Y-%m-%dT%H:%M:%S+00:00')"
+          sed -i -E "s|<updated>[^<]*</updated>|<updated>${NOW}</updated>|" BluebookDSEStyle.csl
+
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet -- BluebookDSEStyle.csl; then
+            echo "No change to <updated>; nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add BluebookDSEStyle.csl
+          git commit -m "chore: bump CSL <updated> timestamp [skip ci]"
+          git push origin main
