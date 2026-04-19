@@ -257,7 +257,7 @@ Lowercase keys are the convention; Zotero's parser is actually case-insensitive,
 
 ## Feedback / bug reports
 
-Open an issue: <https://github.com/danepps/bluebook/issues>
+Email Prof. Epps at <epps@wustl.edu>.
 
 When reporting a bad render, paste the output you got, the output you expected, and (if possible) a screenshot of the Zotero item so the fields can be verified.
 
