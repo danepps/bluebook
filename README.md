@@ -18,6 +18,17 @@ One CSL style file, installable in Zotero:
 
 ## Install
 
+### New to Zotero?
+
+[Zotero](https://www.zotero.org/) is a free, open-source reference manager: it stores your sources (cases, articles, books, websites) in a personal library and lets you insert properly-formatted citations and bibliographies into Word, LibreOffice, or Google Docs at the click of a button. Most academic writers in law and the humanities use Zotero (or one of its commercial cousins like EndNote), and the Bluebook citation style this repo distributes plugs into Zotero to produce footnote-ready Bluebook cites.
+
+If you don't have Zotero yet:
+
+1. **Download Zotero** from <https://www.zotero.org/download/>. The desktop app is the main piece — install it for your operating system.
+2. **Install the browser connector** (also linked from that page) — a small browser extension that grabs source metadata from Westlaw, Lexis, SSRN, journal sites, etc., and saves it into your Zotero library with one click.
+3. **The Word / LibreOffice plug-in is bundled** with the Zotero installer and gets set up automatically the first time you launch Zotero. (For Google Docs, the browser connector handles citation insertion.)
+4. Spend a few minutes with [Zotero's Quick Start Guide](https://www.zotero.org/support/quick_start_guide) — it covers adding sources, organizing them in collections, and inserting cites. Then come back here to install this Bluebook style.
+
 ### Zotero (desktop)
 
 Works with Zotero 7 through 10. (On Zotero 6 the style mostly works, but the **Preprint** item type doesn't exist — see the Preprint section below for the workaround.)
