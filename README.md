@@ -2,8 +2,6 @@
 
 A [Bluebook](https://www.legalbluebook.com/) legal-citation style for [Zotero](https://www.zotero.org/), adapted by **Prof. Daniel Epps** (Washington University School of Law) from the community Bluebook CSL style.
 
-This page is also published at **<https://danepps.github.io/bluebook/>**.
-
 ---
 
 ## What you get
