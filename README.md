@@ -125,6 +125,23 @@ status: forthcoming
 
 You can also write `status: accepted`, `status: in press`, etc. — whatever you type in `status` appears verbatim inside the parenthetical.
 
+### Student note, comment, or other designated article type
+
+Some journal articles carry a designation — *Note*, *Comment*, *Recent Development*, *Essay*, etc. — that Bluebook requires between the author and the title. Add it via the **Extra** field:
+
+```
+genre: Note
+```
+
+The style inserts it automatically and title-cases it regardless of how you type it (`note`, `NOTE`, and `Note` all render as `Note`).
+
+**Typical output:** `Jane Doe, Note, *The Fourth Amendment's Third Way*, 120 Harv. L. Rev. 1627 (2007).`
+
+For **anonymous** student notes (no author listed), leave the Author field blank and set `genre: Note`. The short-cite form will use the italicized short title as the supra anchor — fill in Zotero's **Short Title** field if you want a trimmed version:
+
+- First cite: `Note, *The Fourth Amendment's Third Way*, 120 Harv. L. Rev. 1627 (2007).`
+- Short cite: *The Fourth Amendment's Third Way*, supra note 3, at 1630.
+
 ### Preprint / working paper
 
 Use Item Type `Preprint` (which maps to CSL `article`). Preprint was introduced in **Zotero 7** and is present in Zotero 8; on Zotero 6 it doesn't exist — use `Document` or `Report` instead and expect rougher output.
@@ -232,6 +249,7 @@ Zotero's **Extra** field lets you override or add CSL variables that aren't in t
 | ------------- | ------------ |
 | `status: forthcoming` | Renders `(forthcoming YYYY)` on journal articles and preprints; also enables URL rendering |
 | `status: accepted` | Same mechanism, different word |
+| `genre: Note` | Inserts article-type designation between author and title on journal articles (`Note`, `Comment`, `Recent Development`, etc.) |
 | `event-title: ...` | Override conference/event title |
 | `number-of-pages: ...` | For books |
 
