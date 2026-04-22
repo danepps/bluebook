@@ -436,6 +436,11 @@
               </choose>
               <text macro="author"/>
             </group>
+            <choose>
+              <if type="article-journal" match="any">
+                <text variable="genre"/>
+              </if>
+            </choose>
             <text macro="source"/>
             <text macro="access"/>
           </group>
