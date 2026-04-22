@@ -412,7 +412,14 @@
                       <text variable="volume"/>
                     </if>
                   </choose>
-                  <text macro="author-short"/>
+                  <choose>
+                    <if variable="author">
+                      <text macro="author-short"/>
+                    </if>
+                    <else-if type="article-journal" match="any">
+                      <text variable="title" form="short" font-style="italic"/>
+                    </else-if>
+                  </choose>
                 </group>
                 <group delimiter=" ">
                   <text value="supra" font-style="italic"/>
@@ -454,6 +461,11 @@
                 </if>
               </choose>
             </group>
+            <choose>
+              <if type="article-journal" match="any">
+                <text variable="genre"/>
+              </if>
+            </choose>
             <text macro="source"/>
             <text macro="access"/>
           </group>
