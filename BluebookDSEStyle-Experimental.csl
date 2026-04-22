@@ -445,7 +445,7 @@
             </group>
             <choose>
               <if type="article-journal" match="any">
-                <text variable="genre" text-case="capitalize-first"/>
+                <text variable="genre" text-case="title"/>
               </if>
             </choose>
             <text macro="source"/>
@@ -463,7 +463,7 @@
             </group>
             <choose>
               <if type="article-journal" match="any">
-                <text variable="genre" text-case="capitalize-first"/>
+                <text variable="genre" text-case="title"/>
               </if>
             </choose>
             <text macro="source"/>
