@@ -61,7 +61,7 @@
   </macro>
   <macro name="name-short-macro">
     <names variable="author">
-      <name form="short" and="symbol" delimiter=", "/>
+      <name form="short" and="symbol" delimiter=", " delimiter-precedes-last="never"/>
       <label form="verb-short" prefix=", "/>
       <substitute>
         <text variable="title" form="short"/>
@@ -83,7 +83,7 @@
   </macro>
   <macro name="editor-translator">
     <names variable="editor translator" delimiter=", ">
-      <name and="symbol" delimiter=", "/>
+      <name and="symbol" delimiter=", " delimiter-precedes-last="never"/>
       <label form="short" strip-periods="false" prefix=" "/>
     </names>
   </macro>
@@ -175,6 +175,25 @@
             <text variable="locator"/>
           </group>
           <text macro="issuance" prefix="(" suffix=")"/>
+        </group>
+      </else-if>
+      <else-if type="legislation">
+        <group delimiter=" ">
+          <group delimiter=", ">
+            <group>
+              <text variable="title" text-case="title"/>
+              <text macro="issuance" prefix=" of "/>
+            </group>
+            <text variable="number"/>
+            <group delimiter=" ">
+              <text variable="volume"/>
+              <text macro="container"/>
+              <group delimiter=" ">
+                <text value="§"/>
+                <text variable="section"/>
+              </group>
+            </group>
+          </group>
         </group>
       </else-if>
 <else-if type="article">
@@ -322,36 +341,56 @@
   </macro>
   <macro name="issuance">
     <choose>
-      <if type="article-journal article-magazine article-newspaper broadcast interview manuscript map patent personal_communication song speech thesis webpage post-weblog" match="any">
-        <group>
-          <choose>
-            <if type="article-newspaper thesis post-weblog webpage article-magazine" match="any">
-              <group suffix=", ">
-                <date variable="issued">
-                  <date-part name="month" form="short"/>
-                  <date-part name="day" prefix=" "/>
-                </date>
-              </group>
-            </if>
-          </choose>
+      <if match="any" variable="status">
+        <group delimiter=" ">
+          <text variable="status" text-case="capitalize-first"/>
           <date variable="issued">
             <date-part name="year"/>
           </date>
         </group>
       </if>
       <else>
-        <group delimiter=", ">
-          <text macro="editor-translator"/>
-          <group delimiter=" ">
-            <group delimiter=" ">
-              <text variable="edition"/>
-              <label variable="edition" form="short"/>
+        <choose>
+          <if type="article-journal article-magazine article-newspaper broadcast interview manuscript map patent personal_communication song speech thesis webpage post-weblog" match="any">
+            <group>
+              <choose>
+                <if type="article-newspaper thesis post-weblog webpage article-magazine" match="any">
+                  <group suffix=", ">
+                    <date variable="issued">
+                      <date-part name="month" form="short"/>
+                      <date-part name="day" prefix=" "/>
+                    </date>
+                  </group>
+                </if>
+              </choose>
+              <date variable="issued">
+                <date-part name="year"/>
+              </date>
             </group>
-            <date variable="issued">
-              <date-part name="year"/>
-            </date>
-          </group>
-        </group>
+          </if>
+          <else-if type="legal_case">
+            <group delimiter=" ">
+              <text variable="authority"/>
+              <date variable="issued">
+                <date-part name="year"/>
+              </date>
+            </group>
+          </else-if>
+          <else>
+            <group delimiter=", ">
+              <text macro="editor-translator"/>
+              <group delimiter=" ">
+                <group delimiter=" ">
+                  <text variable="edition"/>
+                  <label variable="edition" form="short"/>
+                </group>
+                <date variable="issued">
+                  <date-part name="year"/>
+                </date>
+              </group>
+            </group>
+          </else>
+        </choose>
       </else>
     </choose>
   </macro>
@@ -371,6 +410,9 @@
       </if>
       <else-if type="legal_case">
         <text variable="container-title" form="short" prefix=" "/>
+      </else-if>
+      <else-if type="legislation">
+        <text variable="container-title"/>
       </else-if>
       <else-if type="article-journal">
         <text variable="container-title" form="short" font-variant="small-caps" prefix=" "/>
@@ -404,6 +446,16 @@
                 </group>
               </group>
             </if>
+            <else-if type="legislation">
+              <group delimiter=" ">
+                <text variable="volume"/>
+                <text variable="container-title" form="short"/>
+                <group delimiter=" ">
+                  <text value="§"/>
+                  <text variable="section"/>
+                </group>
+              </group>
+            </else-if>
             <else>
               <group delimiter=", ">
                 <group delimiter=" ">
