@@ -141,9 +141,7 @@
               </group>
               <group prefix="(" suffix=")" delimiter=" ">
                 <text variable="status"/>
-                <date variable="issued">
-                  <date-part name="year"/>
-                </date>
+                <date variable="issued" date-parts="year" form="text"/>
               </group>
             </group>
           </if>
@@ -209,9 +207,7 @@
         </group>
         <group prefix="(" suffix=")" delimiter=" ">
           <text variable="status"/>
-          <date variable="issued">
-            <date-part name="year"/>
-          </date>
+          <date variable="issued" date-parts="year" form="text"/>
         </group>
       </group>
     </if>
@@ -225,9 +221,7 @@
               <text variable="collection-title"/>
               <text variable="collection-number" prefix="No. "/>
             </group>
-            <date variable="issued" form="text">
-              <date-part name="year"/>
-            </date>
+            <date variable="issued" date-parts="year" form="text"/>
           </group>
         </group>
       </group>
@@ -245,9 +239,7 @@
     <group delimiter=", ">
       <text variable="collection-title"/>
       <text variable="collection-number"/>
-      <date variable="issued" form="text">
-        <date-part name="year"/>
-      </date>
+      <date variable="issued" date-parts="year" form="text"/>
       </group>
     </group>
   </group>
@@ -344,9 +336,7 @@
       <if match="any" variable="status">
         <group delimiter=" ">
           <text variable="status" text-case="capitalize-first"/>
-          <date variable="issued">
-            <date-part name="year"/>
-          </date>
+          <date variable="issued" date-parts="year" form="text"/>
         </group>
       </if>
       <else>
@@ -363,17 +353,13 @@
                   </group>
                 </if>
               </choose>
-              <date variable="issued">
-                <date-part name="year"/>
-              </date>
+              <date variable="issued" date-parts="year" form="text"/>
             </group>
           </if>
           <else-if type="legal_case">
             <group delimiter=" ">
               <text variable="authority"/>
-              <date variable="issued">
-                <date-part name="year"/>
-              </date>
+              <date variable="issued" date-parts="year" form="text"/>
             </group>
           </else-if>
           <else>
@@ -384,9 +370,7 @@
                   <text variable="edition"/>
                   <label variable="edition" form="short"/>
                 </group>
-                <date variable="issued">
-                  <date-part name="year"/>
-                </date>
+                <date variable="issued" date-parts="year" form="text"/>
               </group>
             </group>
           </else>
