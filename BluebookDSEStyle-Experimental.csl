@@ -259,7 +259,7 @@
     <text variable="locator" prefix=" "/>
     <group prefix=" (" suffix=")">
       <date variable="issued">
-        <date-part name="month" suffix=" "/>
+        <date-part name="month" form="short" strip-periods="true" suffix=" "/>
         <date-part name="day" suffix=", "/>
         <date-part name="year"/>
       </date>
