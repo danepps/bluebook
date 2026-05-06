@@ -145,7 +145,6 @@
                   <date-part name="year"/>
                 </date>
               </group>
-              <text variable="locator" prefix="(manuscript at " suffix=")"/>
             </group>
           </if>
           <else>
