@@ -477,10 +477,20 @@
                 <group delimiter=" ">
                   <text value="supra" font-style="italic"/>
                   <text value="note"/>
-                  <group delimiter=", ">
-                    <text variable="first-reference-note-number"/>
-                    <text macro="at_page"/>
-                  </group>
+                  <choose>
+                    <if type="article-journal" variable="status" match="all">
+                      <group delimiter=" ">
+                        <text variable="first-reference-note-number"/>
+                        <text variable="locator" prefix="(manuscript at " suffix=")"/>
+                      </group>
+                    </if>
+                    <else>
+                      <group delimiter=", ">
+                        <text variable="first-reference-note-number"/>
+                        <text macro="at_page"/>
+                      </group>
+                    </else>
+                  </choose>
                 </group>
               </group>
             </else>
