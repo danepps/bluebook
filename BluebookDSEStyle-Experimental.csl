@@ -92,7 +92,17 @@
             <text macro="name-macro"/>
           </if>
           <else>
-            <text macro="name-macro" font-variant="small-caps"/>
+            <choose>
+              <if variable="author">
+                <group delimiter=", ">
+                  <text macro="name-macro" font-variant="small-caps"/>
+                  <text variable="publisher" font-variant="small-caps"/>
+                </group>
+              </if>
+              <else>
+                <text macro="name-macro" font-variant="small-caps"/>
+              </else>
+            </choose>
           </else>
         </choose>
       </else-if>
