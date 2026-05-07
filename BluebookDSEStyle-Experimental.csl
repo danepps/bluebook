@@ -232,16 +232,37 @@
         </group>
       </group>
     </if>
-    <else-if variable="number">
+    <else-if variable="collection-number number" match="any">
       <group>
         <text variable="title" font-style="italic"/>
         <text variable="locator" prefix=" "/>
         <group prefix=" (" suffix=")">
           <group delimiter=", ">
-            <text variable="publisher"/>
+            <choose>
+              <if variable="publisher">
+                <text variable="publisher"/>
+              </if>
+              <else>
+                <text variable="archive"/>
+              </else>
+            </choose>
             <group delimiter=" ">
-              <text variable="genre"/>
-              <text variable="number" prefix="No. "/>
+              <choose>
+                <if variable="genre">
+                  <text variable="genre"/>
+                </if>
+                <else>
+                  <text variable="collection-title"/>
+                </else>
+              </choose>
+              <choose>
+                <if variable="number">
+                  <text variable="number" prefix="No. "/>
+                </if>
+                <else>
+                  <text variable="collection-number" prefix="No. "/>
+                </else>
+              </choose>
             </group>
             <date variable="issued">
               <date-part name="year"/>
