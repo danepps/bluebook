@@ -51,18 +51,8 @@
       <else-if type="bill legislation" match="any">
         <text macro="name-macro"/>
       </else-if>
-      <else-if type="book graphic motion_picture song" match="any">
+      <else-if type="book graphic motion_picture report song" match="any">
         <text macro="name-short-macro" font-variant="small-caps"/>
-      </else-if>
-      <else-if type="report">
-        <choose>
-          <if variable="genre">
-            <text macro="name-short-macro"/>
-          </if>
-          <else>
-            <text macro="name-short-macro" font-variant="small-caps"/>
-          </else>
-        </choose>
       </else-if>
       <else>
         <text macro="name-short-macro"/>
@@ -88,21 +78,14 @@
       </else-if>
       <else-if type="report">
         <choose>
-          <if variable="genre">
-            <text macro="name-macro"/>
+          <if variable="author">
+            <group delimiter=", ">
+              <text macro="name-macro" font-variant="small-caps"/>
+              <text variable="publisher" font-variant="small-caps"/>
+            </group>
           </if>
           <else>
-            <choose>
-              <if variable="author">
-                <group delimiter=", ">
-                  <text macro="name-macro" font-variant="small-caps"/>
-                  <text variable="publisher" font-variant="small-caps"/>
-                </group>
-              </if>
-              <else>
-                <text macro="name-macro" font-variant="small-caps"/>
-              </else>
-            </choose>
+            <text macro="name-macro" font-variant="small-caps"/>
           </else>
         </choose>
       </else-if>
@@ -154,13 +137,6 @@
           </else-if>
           <else-if type="manuscript thesis document" match="any">
             <text macro="url-with-accessed"/>
-          </else-if>
-          <else-if type="report">
-            <choose>
-              <if variable="genre">
-                <text macro="url-with-accessed"/>
-              </if>
-            </choose>
           </else-if>
         </choose>
       </if>
@@ -256,77 +232,59 @@
         </group>
       </group>
     </if>
-    <else>
+    <else-if variable="number">
       <group>
         <text variable="title" font-style="italic"/>
         <text variable="locator" prefix=" "/>
         <group prefix=" (" suffix=")">
           <group delimiter=", ">
+            <text variable="publisher"/>
             <group delimiter=" ">
-              <text variable="collection-title"/>
-              <text variable="collection-number" prefix="No. "/>
+              <text variable="genre"/>
+              <text variable="number" prefix="No. "/>
             </group>
-            <date variable="issued" form="text">
+            <date variable="issued">
               <date-part name="year"/>
             </date>
           </group>
+        </group>
+      </group>
+    </else-if>
+    <else>
+      <group>
+        <text variable="title"/>
+        <text variable="locator" prefix=" "/>
+        <group prefix=" (" suffix=")">
+          <date variable="issued">
+            <date-part name="month" form="short" suffix=" "/>
+            <date-part name="day" suffix=", "/>
+            <date-part name="year"/>
+          </date>
+        </group>
+        <group prefix=" (" suffix=")">
+          <text value="unpublished "/>
+          <choose>
+            <if variable="genre">
+              <text variable="genre" text-case="lowercase"/>
+            </if>
+            <else>
+              <text value="manuscript"/>
+            </else>
+          </choose>
+        </group>
+        <group prefix=" (on file with " suffix=")">
+          <text variable="archive"/>
         </group>
       </group>
     </else>
   </choose>
 </else-if>
 <else-if type="report">
-  <choose>
-    <if variable="genre">
-      <choose>
-        <if variable="number">
-          <group>
-            <text variable="title" font-style="italic"/>
-            <text variable="locator" prefix=" "/>
-            <group prefix=" (" suffix=")">
-              <group delimiter=", ">
-                <text variable="publisher"/>
-                <group delimiter=" ">
-                  <text variable="genre"/>
-                  <text variable="number" prefix="No. "/>
-                </group>
-                <date variable="issued">
-                  <date-part name="year"/>
-                </date>
-              </group>
-            </group>
-          </group>
-        </if>
-        <else>
-          <group>
-            <text variable="title"/>
-            <text variable="locator" prefix=" "/>
-            <group prefix=" (" suffix=")">
-              <date variable="issued">
-                <date-part name="month" form="short" suffix=" "/>
-                <date-part name="day" suffix=", "/>
-                <date-part name="year"/>
-              </date>
-            </group>
-            <group prefix=" (" suffix=")">
-              <text value="unpublished "/>
-              <text variable="genre" text-case="lowercase"/>
-            </group>
-            <group prefix=" (on file with " suffix=")">
-              <text variable="archive"/>
-            </group>
-          </group>
-        </else>
-      </choose>
-    </if>
-    <else>
-      <group>
-        <text variable="title" font-variant="small-caps"/>
-        <text variable="locator" prefix=" "/>
-        <text macro="issuance" prefix=" (" suffix=")"/>
-      </group>
-    </else>
-  </choose>
+  <group>
+    <text variable="title" font-variant="small-caps"/>
+    <text variable="locator" prefix=" "/>
+    <text macro="issuance" prefix=" (" suffix=")"/>
+  </group>
 </else-if>
 <else-if type="thesis manuscript document" match="any">
   <group>
