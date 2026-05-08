@@ -125,6 +125,12 @@ status: forthcoming
 
 You can also write `status: accepted`, `status: in press`, etc. — whatever you type in `status` appears verbatim inside the parenthetical.
 
+**Pincites on forthcoming articles render as `(manuscript at N)`.** Because the journal's printed pagination doesn't exist yet, the pincite refers to the page of the draft manuscript instead of the (nonexistent) journal page. The style emits this automatically — you just enter the pincite as the citation locator the same way you would for any other source. Example with a pincite:
+
+`Jane Doe, *Why the Bluebook*, 137 Harv. L. Rev. (forthcoming 2027) (manuscript at 12), https://papers.ssrn.com/...`
+
+Subsequent (`supra`) cites of a forthcoming article use the same form: `Doe, *supra* note 3 (manuscript at 12)` rather than `Doe, *supra* note 3, at 12`. As soon as the article is no longer forthcoming, remove the `status:` line from Extra and pincites revert to ordinary `at N` rendering.
+
 ### Student note, comment, or other designated article type
 
 Some journal articles carry a designation — *Note*, *Comment*, *Recent Development*, *Essay*, etc. — that Bluebook requires between the author and the title. Add it via the **Extra** field:
