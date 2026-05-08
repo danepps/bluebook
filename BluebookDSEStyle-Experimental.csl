@@ -242,9 +242,12 @@
               <if variable="publisher">
                 <text variable="publisher"/>
               </if>
-              <else>
+              <else-if variable="archive">
                 <text variable="archive"/>
-              </else>
+              </else-if>
+              <else-if variable="genre collection-title" match="all">
+                <text variable="collection-title"/>
+              </else-if>
             </choose>
             <group delimiter=" ">
               <choose>
