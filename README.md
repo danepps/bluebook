@@ -142,24 +142,64 @@ For **anonymous** student notes (no author listed), leave the Author field blank
 - First cite: `Note, *The Fourth Amendment's Third Way*, 120 Harv. L. Rev. 1627 (2007).`
 - Short cite: *The Fourth Amendment's Third Way*, supra note 3, at 1630.
 
-### Preprint / working paper
+### Working paper (Bluebook Rule 17.4)
 
-Use Item Type `Preprint` (which maps to CSL `article`). Preprint was introduced in **Zotero 7** and is present in Zotero 8; on Zotero 6 it doesn't exist — use `Document` or `Report` instead and expect rougher output.
+For a paper formally part of a numbered working-paper series — NBER, Columbia Public Law, university working-paper series, etc. Use Item Type `Preprint` (CSL `article`). Preprint was introduced in **Zotero 7** and is present in Zotero 8; on Zotero 6 it doesn't exist — use the workflow-by-overrides note at the bottom of this section.
+
+**Recommended fields:**
 
 | | Field | Example |
 | - | ----- | ------- |
-| 🔴 | Author | `Jane Doe` |
-| 🔴 | Title | `Draft Paper` |
-| 🔴 | **Series** | `NBER Working Paper` |
-| 🔴 | **Series Number** | `12345` |
-| 🔴 | Date | `2025` |
+| 🔴 | Author | `Alan J. Auerbach` |
+| 🔴 | Title | `National Savings, Economic Welfare…` |
+| 🔴 | **Repository** | `Nat'l Bureau of Econ. Rsch.` (the sponsoring institution) |
+| 🔴 | **Genre** | `Working Paper` (or `Discussion Paper`, `NBER Working Paper`, etc.) |
+| 🔴 | **Series Number** | `729` |
+| 🔴 | Date | `1981` |
 | ⚪ | URL | SSRN/NBER link |
 
-**Output:** `Jane Doe, *Draft Paper* (NBER Working Paper No. 12345, 2025), https://...`
+**Output:** `Alan J. Auerbach, *National Savings…* (Nat'l Bureau of Econ. Rsch., Working Paper No. 729, 1981), https://...`
 
-> *Zotero fields:* use **Series** and **Series Number** (which map to CSL `collection-title` / `collection-number`) — *not* "Repository" / "Archive ID", which map elsewhere. The style automatically inserts `No.` before the number.
+**Trigger:** Series Number is the signal that says "this is a numbered working paper, render it under Rule 17.4." Without a Series Number, the style falls back to the unpublished-manuscript form (Rule 17.2.1) — at which point you should usually switch to the **Manuscript** item type instead (see *Unpublished manuscript* below).
 
-> **Not sure which type to use for a draft?** If the paper has been placed with a journal (even just accepted), use **Journal Article** with `status: forthcoming` (see the *Forthcoming journal article* section above). Use **Preprint** only for pure working papers that aren't tied to an upcoming journal issue — NBER series papers, unplaced drafts, etc.
+**Field fallbacks** (for when your Zotero version, translator, or muscle memory landed the data in a different field, the style reads each slot through a priority chain):
+
+| Slot | Priority chain |
+| ---- | -------------- |
+| Sponsoring org | `publisher` (via Extra: `publisher: NBER`) → **Repository** → **Series** *(only when Genre is also set, so Series isn't doing double duty)* |
+| Descriptor (e.g., "Working Paper") | **Genre** → **Series** *(when Genre is empty)* |
+| Paper number | `number` (via Extra: `number: 729`) → **Series Number** |
+
+So if you populate Genre + Series + Series Number (Repository empty), the style still produces `(Series, Genre No. Number, Year)` — Series fills the sponsor slot because Genre is occupying the descriptor. Only when both Genre and Repository are empty does Series collapse back to descriptor duty.
+
+> **Zotero 6 workaround.** If you're on a version without the Preprint type, use Item Type `Document` and put `publisher: <sponsor>`, `genre: Working Paper`, and `number: <N>` in the Extra field. Output is the same.
+
+> **Not sure which type to use for a draft?**
+> - Paper *placed with a journal* (even just accepted)? → **Journal Article** with `status: forthcoming` (see *Forthcoming journal article* above).
+> - Paper *part of a numbered working-paper series* (NBER WP No. 729, etc.)? → **Preprint**, this section.
+> - Bare unpublished draft, on SSRN or in a drawer, no series, no journal? → **Manuscript**, see next section.
+
+### Unpublished manuscript (Bluebook Rule 17.2.1)
+
+For unpublished work that isn't part of a numbered series and isn't placed with a journal — bare SSRN drafts, in-progress papers, student notes/comments not selected for publication, conference drafts on file with the author. Item Type `Manuscript`. Renders in **roman type** (no italics, no small-caps) per Rule 17.2.
+
+| | Field | Example |
+| - | ----- | ------- |
+| 🔴 | Item Type | `Manuscript` |
+| 🔴 | Author | `Anatoliy Bizhko` |
+| 🔴 | Title | `Capitalism and Democracy` |
+| 🔴 | Date | `2000-02-29` (most precise writing date available) |
+| ⚪ | **Manuscript Type** | `comment`, `note`, `dissertation`, etc. — defaults to `manuscript` |
+| ⚪ | **Archive** | location string — `author`, `the University of Pennsylvania Journal of Labor and Employment Law`, etc. (just the location, the style adds `on file with`) |
+| ⚪ | URL | SSRN/repository link |
+
+**Output:** `Anatoliy Bizhko, Capitalism and Democracy 25 (Feb. 29, 2000) (unpublished manuscript) (on file with author).`
+
+**With a Manuscript Type set:** `Victoria E. Anderson, Company Outing… 12 (Mar. 15, 2004) (unpublished comment) (on file with the University of Pennsylvania Journal of Labor and Employment Law).`
+
+**With a URL (SSRN draft):** `Jane Doe, Some Paper Title 12 (Mar. 15, 2024) (unpublished manuscript), https://ssrn.com/abstract=12345.`
+
+> **Genre / Manuscript Type renders lowercased** to match Bluebook examples — `(unpublished comment)`, not `(unpublished Comment)`. So `comment`, `Comment`, and `COMMENT` all produce the same output.
 
 ### Newspaper article
 
@@ -229,11 +269,25 @@ Item Type `Case`.
 
 > **Cases aren't the style's strong suit.** Bluebook's Rule 10.9 "five-footnote rule" — use a short form only if the full cite appears in the same footnote or one of the preceding five footnotes, otherwise re-cite in full — cannot be implemented in CSL, because the style has no way to count footnote distance (see the known limitation below). The style will short-form every subsequent case cite, even ones that are 30 footnotes downstream. The author typically **enters cases and case short forms manually** in the footnote text rather than through Zotero, and that is a reasonable workflow if precise case-citation behavior matters to you.
 
-### Report (government, institutional, Rule 15)
+### Institutional report (Bluebook Rule 15.7)
 
-Item Type `Report`. 🔴 Required: Institution, Title, Date. ⚪ Report Number. (The **Institution** field is Zotero's label for the publisher on this type.) Institution and title render in small caps.
+For commission reports, GAO/CRS reports, agency reports, and other institutional reports treated as books in Bluebook. Item Type `Report`. Author and title render in small caps.
 
-`U.S. DEP'T OF JUSTICE, ANNUAL REPORT 12 (2024).`
+| | Field | Example |
+| - | ----- | ------- |
+| 🔴 | Item Type | `Report` |
+| 🔴 | Author | `U.S. Dep't of Justice` (or a personal author, see below) |
+| 🔴 | Title | `Annual Report` |
+| 🔴 | Date | `2024` |
+| ⚪ | Institution | optional second institutional name (see below) |
+
+**Pure institutional report (no personal author):** put the institution in the Author field as a single-name author. Output: `U.S. DEP'T OF JUSTICE, ANNUAL REPORT 12 (2024).`
+
+**Report with both a personal author and an institutional sponsor:** put the personal author in **Author** and the institutional name in **Institution**. Both render small-caps before the title:
+
+`JOHN DOE, U.S. GEN. ACCT. OFF., REPORT TITLE 12 (1986).`
+
+> **Don't use Report for working papers.** Despite both being "reports" in plain English, Bluebook 15.7 (book-style institutional reports) and Bluebook 17.4 (working papers) render very differently. Use Item Type **Preprint** for numbered working papers — see the *Working paper* section above.
 
 ### Statute / bill / regulation
 
@@ -280,6 +334,28 @@ Lowercase keys are the convention; Zotero's parser is actually case-insensitive,
 - **Cases: no five-footnote rule.** Bluebook Rule 10.9 says a short-form case cite (`*Brown*, 347 U.S. at 495`) may be used only if the full cite appears in the same footnote or one of the preceding five footnotes — otherwise, cite in full again. CSL has no notion of footnote distance, so this style will short-form *every* subsequent case cite, no matter how far back the full cite was. For precise case-citation behavior, many authors (including this one) enter cases and case short forms manually in the footnote text rather than via Zotero.
 
 > **Coming later.** Several of these gaps (hereinafter, volume-as-year, title-ends-in-numeral) are on the roadmap for the companion Zotero plug-in — see **[danepps/zotero](https://github.com/danepps/zotero)**. The plug-in can introspect the data and post-process citation output in ways that a pure CSL file cannot.
+
+---
+
+## Changelog
+
+### May 2026 — working papers, unpublished manuscripts, institutional reports
+
+- **Working papers (Bluebook Rule 17.4)** now have first-class support via Item Type `Preprint` (CSL `article`). Output: `Author, *Title* pincite (Sponsor, Working Paper No. N, YYYY)` plus URL. Reads sponsor / descriptor / number through a fallback chain (Repository / Genre / Series Number preferred; Series fills the sponsor slot when Genre is set; Extra-field overrides supported). See *Working paper* above.
+- **Unpublished manuscripts (Rule 17.2.1)** now render properly via Item Type `Manuscript`. Output: `Author, Title pincite (Mon. DD, YYYY) (unpublished {type|"manuscript"}) (on file with X)` — all roman per Rule 17.2. Includes URL. See *Unpublished manuscript* above.
+- **Institutional reports (Rule 15.7)** with both a personal author and an institutional sponsor now render both in small-caps before the title (`JOHN DOE, U.S. GEN. ACCT. OFF., REPORT TITLE 12 (1986)`). Item Type `Report` is reserved exclusively for true Rule 15.7 reports — working papers moved off it.
+- The earlier hybrid `report` rendering that conflated working papers and institutional reports is removed.
+
+### April 2026 — forthcoming articles
+
+- **Forthcoming journal articles** now use `(manuscript at N)` for the pincite on both first-cite and `supra` short-cite, when `status: forthcoming` (or any non-empty `status`) is set in Extra. So `Jane Doe, *Title*, 137 Harv. L. Rev. (forthcoming 2027) (manuscript at 12)` and the corresponding `Doe, *supra* note 3 (manuscript at 12)`.
+- URL emission enabled for forthcoming journal articles.
+
+### Earlier (2025–early 2026)
+
+- **Genre designation** for student notes / comments / etc. on journal articles (Extra: `genre: Note`); rendered title-cased between author and title.
+- **Legislation** support (statutes, bills, regulations) graduated from experimental.
+- Various small fixes — Oxford-comma-before-ampersand in author lists, anonymous-article handling, `<bibliography>` element added.
 
 ---
 
