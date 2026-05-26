@@ -138,6 +138,9 @@
           <else-if type="manuscript thesis document" match="any">
             <text macro="url-with-accessed"/>
           </else-if>
+          <else-if type="song" match="any">
+            <text macro="url-with-accessed"/>
+          </else-if>
         </choose>
       </if>
     </choose>
@@ -390,6 +393,36 @@
         <text variable="locator" prefix=" "/>
         <text macro="issuance" prefix=" (" suffix=")"/>
       </else-if>
+      <else-if type="song">
+        <group delimiter=" ">
+          <group delimiter=", ">
+            <group delimiter=": ">
+              <text variable="container-title" font-variant="small-caps"/>
+              <text variable="title" font-style="italic"/>
+            </group>
+            <text macro="at_page"/>
+          </group>
+          <group prefix="(" suffix=")" delimiter=", ">
+            <text variable="publisher"/>
+            <choose>
+              <if variable="issued">
+                <date variable="issued">
+                  <date-part name="month" form="short" suffix=" "/>
+                  <date-part name="day" suffix=", "/>
+                  <date-part name="year"/>
+                </date>
+              </if>
+              <else-if variable="accessed">
+                <date variable="accessed">
+                  <date-part name="month" form="short" suffix=" "/>
+                  <date-part name="day" suffix=", "/>
+                  <date-part name="year"/>
+                </date>
+              </else-if>
+            </choose>
+          </group>
+        </group>
+      </else-if>
       <else>
         <group delimiter=", ">
           <text variable="title" font-style="italic"/>
@@ -535,6 +568,9 @@
                     </if>
                     <else-if type="article-journal" match="any">
                       <text variable="title" form="short" font-style="italic"/>
+                    </else-if>
+                    <else-if type="song" match="any">
+                      <text variable="container-title" form="short" font-variant="small-caps"/>
                     </else-if>
                   </choose>
                 </group>
