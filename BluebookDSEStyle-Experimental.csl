@@ -138,7 +138,7 @@
           <else-if type="manuscript thesis document" match="any">
             <text macro="url-with-accessed"/>
           </else-if>
-          <else-if type="song" match="any">
+          <else-if type="song broadcast podcast" match="any">
             <text macro="url-with-accessed"/>
           </else-if>
         </choose>
@@ -393,13 +393,15 @@
         <text variable="locator" prefix=" "/>
         <text macro="issuance" prefix=" (" suffix=")"/>
       </else-if>
-      <else-if type="song">
+      <else-if type="song broadcast podcast" match="any">
         <group delimiter=" ">
           <group delimiter=", ">
             <group delimiter=": ">
               <choose>
                 <if variable="author">
-                  <text macro="author"/>
+                  <names variable="author" font-variant="small-caps">
+                    <name and="symbol" delimiter=", " delimiter-precedes-last="never"/>
+                  </names>
                 </if>
                 <else-if variable="container-title">
                   <text variable="container-title" font-variant="small-caps"/>
@@ -576,7 +578,7 @@
                     <else-if type="article-journal" match="any">
                       <text variable="title" form="short" font-style="italic"/>
                     </else-if>
-                    <else-if type="song" match="any">
+                    <else-if type="song broadcast podcast" match="any">
                       <text variable="container-title" form="short" font-variant="small-caps"/>
                     </else-if>
                   </choose>
@@ -612,7 +614,7 @@
                 </if>
               </choose>
               <choose>
-                <if type="song" match="none">
+                <if type="song broadcast podcast" match="none">
                   <text macro="author"/>
                 </if>
               </choose>
@@ -655,7 +657,7 @@
     <layout suffix=".">
       <group delimiter=", ">
         <choose>
-          <if type="song" match="none">
+          <if type="song broadcast podcast" match="none">
             <text macro="author"/>
           </if>
         </choose>
