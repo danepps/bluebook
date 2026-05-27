@@ -112,7 +112,7 @@
                 <date variable="accessed">
                   <date-part name="month" form="short" suffix=" " strip-periods="true"/>
                   <date-part name="day" suffix=", "/>
-                  <date-part name="year"/>
+                  <date-part name="year" range-delimiter="-"/>
                 </date>
               </group>
             </if>
@@ -161,7 +161,7 @@
               <group prefix="(" suffix=")" delimiter=" ">
                 <text variable="status"/>
                 <date variable="issued">
-                  <date-part name="year"/>
+                  <date-part name="year" range-delimiter="-"/>
                 </date>
               </group>
               <text variable="locator" prefix="(manuscript at " suffix=")"/>
@@ -230,7 +230,7 @@
         <group prefix="(" suffix=")" delimiter=" ">
           <text variable="status"/>
           <date variable="issued">
-            <date-part name="year"/>
+            <date-part name="year" range-delimiter="-"/>
           </date>
         </group>
       </group>
@@ -271,7 +271,7 @@
               </choose>
             </group>
             <date variable="issued">
-              <date-part name="year"/>
+              <date-part name="year" range-delimiter="-"/>
             </date>
           </group>
         </group>
@@ -285,7 +285,7 @@
           <date variable="issued">
             <date-part name="month" form="short" suffix=" "/>
             <date-part name="day" suffix=", "/>
-            <date-part name="year"/>
+            <date-part name="year" range-delimiter="-"/>
           </date>
         </group>
         <group prefix=" (" suffix=")">
@@ -321,7 +321,7 @@
       <date variable="issued">
         <date-part name="month" form="short" suffix=" "/>
         <date-part name="day" suffix=", "/>
-        <date-part name="year"/>
+        <date-part name="year" range-delimiter="-"/>
       </date>
     </group>
     <group prefix=" (" suffix=")">
@@ -426,14 +426,14 @@
                 <date variable="issued">
                   <date-part name="month" form="short" suffix=" "/>
                   <date-part name="day" suffix=", "/>
-                  <date-part name="year"/>
+                  <date-part name="year" range-delimiter="-"/>
                 </date>
               </if>
               <else-if variable="accessed">
                 <date variable="accessed">
                   <date-part name="month" form="short" suffix=" "/>
                   <date-part name="day" suffix=", "/>
-                  <date-part name="year"/>
+                  <date-part name="year" range-delimiter="-"/>
                 </date>
               </else-if>
             </choose>
@@ -460,7 +460,7 @@
         <group delimiter=" ">
           <text variable="status" text-case="capitalize-first"/>
           <date variable="issued">
-            <date-part name="year"/>
+            <date-part name="year" range-delimiter="-"/>
           </date>
         </group>
       </if>
@@ -479,7 +479,7 @@
                 </if>
               </choose>
               <date variable="issued">
-                <date-part name="year"/>
+                <date-part name="year" range-delimiter="-"/>
               </date>
             </group>
           </if>
@@ -487,7 +487,7 @@
             <group delimiter=" ">
               <text variable="authority"/>
               <date variable="issued">
-                <date-part name="year"/>
+                <date-part name="year" range-delimiter="-"/>
               </date>
             </group>
           </else-if>
@@ -500,7 +500,7 @@
                   <label variable="edition" form="short"/>
                 </group>
                 <date variable="issued">
-                  <date-part name="year"/>
+                  <date-part name="year" range-delimiter="-"/>
                 </date>
               </group>
             </group>
