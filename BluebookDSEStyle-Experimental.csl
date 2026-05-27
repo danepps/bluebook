@@ -51,7 +51,7 @@
       <else-if type="bill legislation" match="any">
         <text macro="name-macro"/>
       </else-if>
-      <else-if type="book graphic motion_picture report song" match="any">
+      <else-if type="book graphic motion_picture report song broadcast" match="any">
         <text macro="name-short-macro" font-variant="small-caps"/>
       </else-if>
       <else>
@@ -73,7 +73,7 @@
       <if type="bill legal_case legislation" match="any">
         <text macro="name-macro"/>
       </if>
-      <else-if type="book graphic motion_picture song" match="any">
+      <else-if type="book graphic motion_picture song broadcast" match="any">
         <text macro="name-macro" font-variant="small-caps"/>
       </else-if>
       <else-if type="report">
@@ -399,9 +399,7 @@
             <group delimiter=": ">
               <choose>
                 <if variable="author">
-                  <names variable="author" font-variant="small-caps">
-                    <name and="symbol" delimiter=", " delimiter-precedes-last="never"/>
-                  </names>
+                  <text macro="author"/>
                 </if>
                 <else-if variable="container-title">
                   <text variable="container-title" font-variant="small-caps"/>
