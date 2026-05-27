@@ -23,7 +23,7 @@
     <category citation-format="note"/>
     <category field="law"/>
     <summary>The Bluebook legal citation style for law reviews, with modifications from Prof. Daniel Epps of Washington University School of Law.</summary>
-    <updated>2026-05-08T18:54:01+00:00</updated>
+    <updated>2026-05-27T01:20:02+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale>
@@ -51,7 +51,7 @@
       <else-if type="bill legislation" match="any">
         <text macro="name-macro"/>
       </else-if>
-      <else-if type="book graphic motion_picture report song" match="any">
+      <else-if type="book graphic motion_picture report song broadcast" match="any">
         <text macro="name-short-macro" font-variant="small-caps"/>
       </else-if>
       <else>
@@ -73,7 +73,7 @@
       <if type="bill legal_case legislation" match="any">
         <text macro="name-macro"/>
       </if>
-      <else-if type="book graphic motion_picture song" match="any">
+      <else-if type="book graphic motion_picture song broadcast" match="any">
         <text macro="name-macro" font-variant="small-caps"/>
       </else-if>
       <else-if type="report">
@@ -136,6 +136,9 @@
             </choose>
           </else-if>
           <else-if type="manuscript thesis document" match="any">
+            <text macro="url-with-accessed"/>
+          </else-if>
+          <else-if type="song broadcast" match="any">
             <text macro="url-with-accessed"/>
           </else-if>
         </choose>
@@ -390,6 +393,53 @@
         <text variable="locator" prefix=" "/>
         <text macro="issuance" prefix=" (" suffix=")"/>
       </else-if>
+      <else-if type="song broadcast" match="any">
+        <group delimiter=" ">
+          <group delimiter=", ">
+            <group delimiter=": ">
+              <choose>
+                <if variable="author">
+                  <text macro="author"/>
+                </if>
+                <else-if variable="host">
+                  <group font-variant="small-caps">
+                    <names variable="host">
+                      <name and="symbol" delimiter=", " delimiter-precedes-last="never"/>
+                    </names>
+                  </group>
+                </else-if>
+                <else-if variable="container-title">
+                  <text variable="container-title" font-variant="small-caps"/>
+                </else-if>
+                <else-if variable="collection-title">
+                  <text variable="collection-title" font-variant="small-caps"/>
+                </else-if>
+              </choose>
+              <text variable="title" font-style="italic"/>
+            </group>
+            <text macro="at_page"/>
+          </group>
+          <group prefix="(" suffix=")" delimiter=", ">
+            <text variable="publisher"/>
+            <choose>
+              <if variable="issued">
+                <date variable="issued">
+                  <date-part name="month" form="short" suffix=" "/>
+                  <date-part name="day" suffix=", "/>
+                  <date-part name="year"/>
+                </date>
+              </if>
+              <else-if variable="accessed">
+                <date variable="accessed">
+                  <date-part name="month" form="short" suffix=" "/>
+                  <date-part name="day" suffix=", "/>
+                  <date-part name="year"/>
+                </date>
+              </else-if>
+            </choose>
+          </group>
+        </group>
+      </else-if>
       <else>
         <group delimiter=", ">
           <text variable="title" font-style="italic"/>
@@ -536,6 +586,9 @@
                     <else-if type="article-journal" match="any">
                       <text variable="title" form="short" font-style="italic"/>
                     </else-if>
+                    <else-if type="song broadcast" match="any">
+                      <text variable="container-title" form="short" font-variant="small-caps"/>
+                    </else-if>
                   </choose>
                 </group>
                 <group delimiter=" ">
@@ -568,7 +621,11 @@
                   <text variable="volume"/>
                 </if>
               </choose>
-              <text macro="author"/>
+              <choose>
+                <if type="song broadcast" match="none">
+                  <text macro="author"/>
+                </if>
+              </choose>
             </group>
             <choose>
               <if type="article-journal" match="any">
@@ -607,7 +664,11 @@
     </sort>
     <layout suffix=".">
       <group delimiter=", ">
-        <text macro="author"/>
+        <choose>
+          <if type="song broadcast" match="none">
+            <text macro="author"/>
+          </if>
+        </choose>
         <text macro="source"/>
         <text macro="access"/>
       </group>

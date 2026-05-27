@@ -240,6 +240,26 @@ Item Type `Web Page`.
 
 Item Type `Blog Post` (CSL `post-weblog`). Like a webpage, but the style **does not** add "last visited" (blog posts carry their own publication date). 🔴 Required: Author, Title, Blog Title, URL, Date.
 
+### Podcast (Bluebook Rule 18.8.1(c))
+
+Item Type `Podcast`. The podcast/show name renders in small caps, followed by a colon and the italic episode title, with the streaming service and date in a trailing parenthetical.
+
+| | Field | Example | Renders as |
+| - | ----- | ------- | ---------- |
+| | Item Type | `Podcast` | |
+| 🔴 | **Podcaster** | `Digging a Hole: The Legal Theory Podcast` (enter as a *single-field* name — click the icon to switch from two-field, or the show name will be split into first/last) | DIGGING A HOLE: THE LEGAL THEORY PODCAST (small caps) |
+| 🔴 | Title | `John Goldberg and Benjamin Zipursky` | *John Goldberg and Benjamin Zipursky* |
+| 🔴 | **Publisher** | `Apple Podcasts` | `(Apple Podcasts, …)` — the streaming service |
+| 🔴 | Date | `11/24/2026` | `Nov. 24, 2026` |
+| ⚪ | URL | `https://...` | appended after the parenthetical |
+| ⚪ | Accessed | only fill if Date is unknown | renders in place of Date — Rule 18.8.1(c) allows "last streamed" when release date is unavailable |
+
+**Output:** `DIGGING A HOLE: THE LEGAL THEORY PODCAST: *John Goldberg and Benjamin Zipursky* (Apple Podcasts, Nov. 24, 2026), https://www.diggingaholepodcast.com/episodes/episode-09-goldberg-zipursky`
+
+**Time-marker pincites** (`, at 12:34`) come from Zotero's citation **Locator** at insert time — leave the Locator label set to its default and type the time in the locator field. The style emits `, at <locator>` between the episode title and the parenthetical.
+
+> **Series Title also works** as a fallback if you prefer to keep the show name out of the Podcaster (creator) field — the style falls back from Podcaster (CSL `host`) to Series Title (CSL `collection-title`) when Podcaster is blank.
+
 ### Book
 
 Item Type `Book`. Author and title render in **small caps** per Rule 15. 🔴 Required: Author, Title, Date. ⚪ Edition, Editor/Translator (added to parenthetical if present).
@@ -344,6 +364,10 @@ Lowercase keys are the convention; Zotero's parser is actually case-insensitive,
 ---
 
 ## Changelog
+
+### May 2026 — podcasts
+
+- **Podcasts (Bluebook Rule 18.8.1(c))** now have first-class support via Item Type `Podcast`. Output: `SHOW NAME: *Episode Title* (Streaming Service, Date), URL`, with the show name in small caps and the episode title italicized. Streaming service comes from the native **Publisher** field. Time-marker pincites (`, at 12:34`) work via the citation locator. If the release date is unknown, fill the Accessed field instead — the style renders that in its place per the rule's "last streamed" provision. See *Podcast* above.
 
 ### May 2026 — working papers, unpublished manuscripts, institutional reports
 

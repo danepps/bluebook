@@ -41,6 +41,7 @@ These have been debated and settled. Don't "fix" them without asking.
   - no `page-first` but URL set → web form (`Title, Paper (Date)` + URL)
   - neither → bare (`Title, Paper, Date`)
 - **Rule 10.9 case short form** in `subsequent` position: italic short name + volume + reporter(short) + `at` pincite. All other subsequent cites use `AUTHOR, supra note N, at X`.
+- **Podcasts (Bluebook Rule 18.8.1(c))** render as `SHOW NAME: *Episode Title*, at TT:TT (Streaming Service, Date), URL` via a dedicated `else-if type="song broadcast"` branch in `source`. Zotero's Podcast item type exports as CSL `broadcast`; Podcaster creator → `host`; Series Title → `collection-title`. Show name resolves through `author` → `host` → `container-title` → `collection-title`, all rendered small-caps. Streaming service comes from native Publisher (`publisher`). Date falls back to `accessed` when `issued` is empty (rule allows "last streamed" date when no release date). The citation and bibliography layouts skip the standard author macro call for `song broadcast` (the source branch embeds it inline with a `:` separator); `broadcast` was added to the small-caps lists in `author` / `author-short` so the embedded macro call produces the right font. `host` is also rendered small-caps via a `<group font-variant="small-caps">` wrapper because the author macro only checks `author`. **Don't put `font-variant` directly on `<names>`** — the official CSL 1.0.2 schema allows it, but Zotero's installer flags such files as "not a valid CSL 1.0.2 style file." Wrap the `<names>` in a formatted `<group>` instead.
 - **`<bibliography>` element is approximate** — the style targets law-review footnotes, not Bluebook Tables of Authorities. Don't over-invest here.
 - **Stable distribution URL** is `https://danepps.github.io/bluebook/BluebookDSEStyle.csl`. Never revert to `raw.githubusercontent.com`.
 
@@ -88,5 +89,6 @@ Update this section when any of the above ships, or when a new batch of work mat
 ## Things to double-check before releasing a CSL change
 
 - `xmllint --noout BluebookDSEStyle.csl` is clean.
-- Install the modified style in Zotero and spot-check at least: one case, one book with 3+ authors, one journal article, one forthcoming article (with `status: forthcoming`), one webpage (with accessed date), one newspaper article (with both page and URL set).
+- Install the modified style in Zotero and spot-check at least: one case, one book with 3+ authors, one journal article, one forthcoming article (with `status: forthcoming`), one webpage (with accessed date), one newspaper article (with both page and URL set), one podcast (Item Type Podcast, with Podcaster, Title, Publisher, Date, URL set).
 - `<updated>` will be rewritten automatically by the workflow; don't bother editing it manually.
+- Validate against the official CSL schema, not just XML well-formedness: `java -jar jing.jar -c csl.rnc BluebookDSEStyle.csl`. **Schema-clean doesn't guarantee Zotero-clean** — Zotero's installer is stricter than the spec for some attribute placements (e.g., `font-variant` directly on `<names>`).
