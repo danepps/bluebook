@@ -49,17 +49,19 @@ The Zotero plug-ins for Word, LibreOffice, and Google Docs pick up the style aut
 
 ## Updating
 
-Zotero only auto-updates styles installed from the [official CSL repository](https://www.zotero.org/styles). This style is not there — so updates are **manual**:
+Zotero only auto-updates styles installed from the [official CSL repository](https://www.zotero.org/styles). This style is not there — so updates are **manual**, but straightforward:
 
-1. **Preferences → Cite → Styles.**
-2. Select the existing "Bluebook Style — Epps Version" entry and click **−** to remove it.
-3. Re-install from the URL above.
+1. **Download the updated file.** Right-click the install URL above → *Save Link As* and save the `.csl` file anywhere convenient.
+2. **Open it in Zotero.** Double-click the downloaded file, or in Zotero go to **Preferences → Cite → Styles**, click **+**, and select the file.
+3. **Choose "Update."** Zotero will detect that a style with this name is already installed and prompt you to update it. Confirm.
+
+No need to delete the old style first — Zotero handles the replacement automatically.
 
 If you care about knowing when to update, go to the [GitHub repository](https://github.com/danepps/bluebook) and **Watch** it (top-right of that page → *Watch → Custom → Releases*). Each notable change is tagged, and you'll get an email.
 
 See what changed between versions in the [commit history](https://github.com/danepps/bluebook/commits/main) or on the [Releases page](https://github.com/danepps/bluebook/releases).
 
-> **Early adopter migration note.** If you installed an older version of this style (before the move to the GitHub Pages URL), your installed copy has a different internal `<id>` than the current file. Trying to install the new one on top will produce a generic "unexpected error" in Zotero. To migrate: in **Preferences → Cite → Styles**, delete the existing "Bluebook Style — Epps Version" entry and then install the new file. One-time only — after that, updates show the normal "Update existing style?" prompt.
+> **Early adopter migration note.** If you installed an older version of this style (before the move to the GitHub Pages URL), your installed copy has a different internal `<id>` than the current file. The update-in-place flow above will not work — trying to install the new file will produce a generic "unexpected error." To migrate: in **Preferences → Cite → Styles**, delete the existing "Bluebook Style — Epps Version" entry and then install the new file fresh. One-time only — after that, the normal update flow above applies.
 
 ---
 
