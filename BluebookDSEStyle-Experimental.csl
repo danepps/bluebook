@@ -138,7 +138,7 @@
           <else-if type="manuscript thesis document" match="any">
             <text macro="url-with-accessed"/>
           </else-if>
-          <else-if type="song broadcast podcast" match="any">
+          <else-if type="song broadcast" match="any">
             <text macro="url-with-accessed"/>
           </else-if>
         </choose>
@@ -393,7 +393,7 @@
         <text variable="locator" prefix=" "/>
         <text macro="issuance" prefix=" (" suffix=")"/>
       </else-if>
-      <else-if type="song broadcast podcast" match="any">
+      <else-if type="song broadcast" match="any">
         <group delimiter=" ">
           <group delimiter=", ">
             <group delimiter=": ">
@@ -578,7 +578,7 @@
                     <else-if type="article-journal" match="any">
                       <text variable="title" form="short" font-style="italic"/>
                     </else-if>
-                    <else-if type="song broadcast podcast" match="any">
+                    <else-if type="song broadcast" match="any">
                       <text variable="container-title" form="short" font-variant="small-caps"/>
                     </else-if>
                   </choose>
@@ -614,7 +614,7 @@
                 </if>
               </choose>
               <choose>
-                <if type="song broadcast podcast" match="none">
+                <if type="song broadcast" match="none">
                   <text macro="author"/>
                 </if>
               </choose>
@@ -657,7 +657,7 @@
     <layout suffix=".">
       <group delimiter=", ">
         <choose>
-          <if type="song broadcast podcast" match="none">
+          <if type="song broadcast" match="none">
             <text macro="author"/>
           </if>
         </choose>
