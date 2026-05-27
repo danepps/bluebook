@@ -401,15 +401,18 @@
                 <if variable="author">
                   <text macro="author"/>
                 </if>
-                <else-if variable="composer host narrator producer director performer" match="any">
+                <else-if variable="composer host narrator producer director performer editor translator interviewer illustrator container-author collection-editor curator chair compiler contributor guest organizer recipient script-writer series-creator executive-producer original-author reviewed-author editorial-director" match="any">
                   <group font-variant="small-caps">
-                    <names variable="composer host narrator producer director performer">
+                    <names variable="composer host narrator producer director performer editor translator interviewer illustrator container-author collection-editor curator chair compiler contributor guest organizer recipient script-writer series-creator executive-producer original-author reviewed-author editorial-director">
                       <name and="symbol" delimiter=", " delimiter-precedes-last="never"/>
                     </names>
                   </group>
                 </else-if>
                 <else-if variable="container-title">
                   <text variable="container-title" font-variant="small-caps"/>
+                </else-if>
+                <else-if variable="collection-title">
+                  <text variable="collection-title" font-variant="small-caps"/>
                 </else-if>
               </choose>
               <text variable="title" font-style="italic"/>
