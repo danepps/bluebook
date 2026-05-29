@@ -160,9 +160,7 @@
               </group>
               <group prefix="(" suffix=")" delimiter=" ">
                 <text variable="status"/>
-                <date variable="issued">
-                  <date-part name="year"/>
-                </date>
+                <date variable="issued" date-parts="year" form="text"/>
               </group>
               <text variable="locator" prefix="(manuscript at " suffix=")"/>
             </group>
@@ -178,7 +176,7 @@
                 </group>
                 <text variable="locator"/>
               </group>
-              <text macro="issuance" prefix="(" suffix=")"/>
+              <date variable="issued" date-parts="year" form="text" prefix="(" suffix=")"/>
             </group>
           </else>
         </choose>
