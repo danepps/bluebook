@@ -535,7 +535,7 @@
       </else>
     </choose>
   </macro>
-  <citation et-al-min="5" et-al-use-first="1">
+  <citation et-al-min="5" et-al-use-first="1" near-note-distance="5">
     <layout suffix="" delimiter="; ">
       <choose>
         <if position="ibid-with-locator">
@@ -550,14 +550,24 @@
         <else-if position="subsequent">
           <choose>
             <if type="legal_case">
-              <group delimiter=", ">
-                <text macro="author-short"/>
-                <group delimiter=" ">
-                  <text variable="volume"/>
-                  <text variable="container-title" form="short"/>
-                  <text macro="at_page"/>
-                </group>
-              </group>
+              <choose>
+                <if position="near-note">
+                  <group delimiter=", ">
+                    <text macro="author-short"/>
+                    <group delimiter=" ">
+                      <text variable="volume"/>
+                      <text variable="container-title" form="short"/>
+                      <text macro="at_page"/>
+                    </group>
+                  </group>
+                </if>
+                <else>
+                  <group delimiter=", ">
+                    <text macro="source"/>
+                    <text macro="access"/>
+                  </group>
+                </else>
+              </choose>
             </if>
             <else-if type="legislation">
               <group delimiter=" ">
