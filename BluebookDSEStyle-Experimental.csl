@@ -562,9 +562,17 @@
                   </group>
                 </if>
                 <else>
-                  <group delimiter=", ">
-                    <text macro="source"/>
-                    <text macro="access"/>
+                  <!-- Beyond the 5-note window this case reverts to a full cite.
+                       When the same field was previously rendered as the italic
+                       short form, Word keeps that italic run and a Refresh won't
+                       clear it. Nesting font-style="normal" inside an italic group
+                       forces citeproc to emit an explicit italics-off (RTF \i0), so
+                       Word resets the run. Output is plain roman in every format. -->
+                  <group font-style="italic">
+                    <group delimiter=", " font-style="normal">
+                      <text macro="source"/>
+                      <text macro="access"/>
+                    </group>
                   </group>
                 </else>
               </choose>
