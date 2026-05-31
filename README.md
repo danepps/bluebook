@@ -45,6 +45,8 @@ Works with Zotero 7 through 10. (On Zotero 6 the style mostly works, but the **P
 
 The Zotero plug-ins for Word, LibreOffice, and Google Docs pick up the style automatically — once installed in Zotero, choose it from the document-preferences dropdown. **Zotero must be running** in the background while you're inserting or editing citations from Word/Docs/LibreOffice; if Zotero is closed, the plug-in buttons do nothing.
 
+> **Long articles: turn off automatic updating.** In the same **Document Preferences** dialog where you pick this style, un-check **"Automatically update citations"** when you're working on a large document. A full law-review article with hundreds of footnotes gets sluggish if Zotero re-renders every cite on each edit. With it off, citations that need updating are flagged, and you update them all at once with Zotero's **Refresh** button. **Refresh before you finalize** — this style's Rule 10.9 five-footnote short-/full-form logic settles only on a refresh, so a manual refresh at the end makes sure case cites resolve correctly.
+
 ---
 
 ## Updating
@@ -299,7 +301,7 @@ Item Type `Case`.
 
 > Fill the **Short Title** field on the case (e.g., `Brown`) to control how the short name appears.
 
-> **Rule 10.9's five-footnote rule now works.** Bluebook's Rule 10.9 — use a short form only if the full cite appears in the same footnote or one of the preceding five footnotes, otherwise re-cite in full — is applied automatically. The style short-forms a subsequent case cite only when the prior cite is within five footnotes; beyond that window it reverts to the full cite (`Brown v. Board of Education, 347 U.S. 483 (1954)`). This relies on Zotero's footnote-distance tracking, so it's accurate within a live document but won't survive being copied into a context where the processor can't see the surrounding notes. The author still typically **enters cases and case short forms manually** in the footnote text rather than through Zotero, and that remains a reasonable workflow if precise case-citation behavior matters to you.
+> **Rule 10.9's five-footnote rule now works.** Bluebook's Rule 10.9 — use a short form only if the full cite appears in the same footnote or one of the preceding five footnotes, otherwise re-cite in full — is applied automatically. The style short-forms a subsequent case cite only when the prior cite is within five footnotes; beyond that window it reverts to the full cite (`Brown v. Board of Education, 347 U.S. 483 (1954)`). This relies on Zotero's footnote-distance tracking, so it's accurate within a live document but won't survive being copied into a context where the processor can't see the surrounding notes. Personally, this author still typically **enters cases and case short forms manually** in the footnote text rather than through Zotero, and that remains a reasonable workflow if precise case-citation behavior matters to you.
 
 ### Institutional report (Bluebook Rule 15.7)
 
