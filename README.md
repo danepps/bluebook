@@ -45,6 +45,8 @@ Works with Zotero 7 through 10. (On Zotero 6 the style mostly works, but the **P
 
 The Zotero plug-ins for Word, LibreOffice, and Google Docs pick up the style automatically — once installed in Zotero, choose it from the document-preferences dropdown. **Zotero must be running** in the background while you're inserting or editing citations from Word/Docs/LibreOffice; if Zotero is closed, the plug-in buttons do nothing.
 
+> **Long articles: turn off automatic updating.** In the same **Document Preferences** dialog where you pick this style, un-check **"Automatically update citations"** when you're working on a large document. A full law-review article with hundreds of footnotes gets sluggish if Zotero re-renders every cite on each edit. With it off, citations that need updating are flagged, and you update them all at once with Zotero's **Refresh** button. **Refresh before you finalize** — this style's Rule 10.9 five-footnote short-/full-form logic settles only on a refresh, so a manual refresh at the end makes sure case cites resolve correctly.
+
 ---
 
 ## Updating
