@@ -49,17 +49,21 @@ The Zotero plug-ins for Word, LibreOffice, and Google Docs pick up the style aut
 
 ## Updating
 
-Zotero only auto-updates styles installed from the [official CSL repository](https://www.zotero.org/styles). This style is not there — so updates are **manual**:
+Zotero only auto-updates styles installed from the [official CSL repository](https://www.zotero.org/styles). This style isn't there, so you update it yourself — but **you don't need to remove the old copy first.** Just install the new version on top of it: Zotero recognizes that it's the same style and replaces your existing copy.
 
-1. **Preferences → Cite → Styles.**
-2. Select the existing "Bluebook Style — Epps Version" entry and click **−** to remove it.
-3. Re-install from the URL above.
+To update:
+
+1. **Download** the latest `.csl` file (right-click the install URL above → "Save Link As").
+2. Install it, either way works:
+   - **Double-click** the downloaded file — Zotero opens and offers to install it; or
+   - In Zotero, open **Preferences → Cite → Styles**, click **+**, and select the downloaded file.
+3. Zotero detects the existing style and asks to **replace** it. Confirm, and you're on the latest version.
 
 If you care about knowing when to update, go to the [GitHub repository](https://github.com/danepps/bluebook) and **Watch** it (top-right of that page → *Watch → Custom → Releases*). Each notable change is tagged, and you'll get an email.
 
 See what changed between versions in the [commit history](https://github.com/danepps/bluebook/commits/main) or on the [Releases page](https://github.com/danepps/bluebook/releases).
 
-> **Early adopter migration note.** If you installed an older version of this style (before the move to the GitHub Pages URL), your installed copy has a different internal `<id>` than the current file. Trying to install the new one on top will produce a generic "unexpected error" in Zotero. To migrate: in **Preferences → Cite → Styles**, delete the existing "Bluebook Style — Epps Version" entry and then install the new file. One-time only — after that, updates show the normal "Update existing style?" prompt.
+> **Early adopter migration note.** If you installed an old version of this style from the `raw.githubusercontent.com` URL (before the move to the GitHub Pages URL), your installed copy has a different internal `<id>` than the current file. Zotero won't recognize the new file as the same style, so installing on top produces a generic "unexpected error." This is the **one case where you do need to remove first**: in **Preferences → Cite → Styles**, select the existing "Bluebook Style — Epps Version" entry, click **−** to delete it, then install the new file. One-time only — after that, the normal replace-in-place update above works for every future version.
 
 ---
 
@@ -352,7 +356,7 @@ Lowercase keys are the convention; Zotero's parser is actually case-insensitive,
 
 ## Known limitations
 
-- **No auto-update.** Zotero only auto-updates styles from its official repository. Reinstall manually when new versions ship (see above).
+- **No auto-update.** Zotero only auto-updates styles from its official repository. Install the new file yourself when versions ship — it replaces your existing copy in place (see [Updating](#updating)).
 - **No introductory signals.** *See*, *Cf.*, *But see*, etc. are produced by a separate Zotero plug-in, not this style.
 - **Limited statute / regulation coverage.** The style is primarily tuned for cases, books, journal articles, working papers, and internet sources.
 - **Bibliography rendering is approximate.** The style targets law-review footnotes (note-style). If you ask Zotero to build a bibliography/works-cited list, it will produce something reasonable but not a Bluebook Table of Authorities.
