@@ -182,17 +182,26 @@
         </choose>
       </if>
       <else-if type="legal_case">
-        <group delimiter=" ">
-          <group delimiter=", ">
-            <text variable="title"/>
-            <text variable="volume"/>
+        <!-- Wrap in font-style="normal" inside an italic group so citeproc emits an
+             explicit italics-off (RTF \i0). When a case cite is re-rendered full in
+             place after previously being the italic short form (Rule 10.9 short->full,
+             e.g. footnotes inserted past the 5-note window, or an earlier cite deleted
+             so this becomes the first reference), Word otherwise keeps the stale italic
+             run and a Refresh won't clear it. Covers every full case cite; renders plain
+             roman in text, HTML, and RTF. -->
+        <group font-style="italic">
+          <group delimiter=" " font-style="normal">
+            <group delimiter=", ">
+              <text variable="title"/>
+              <text variable="volume"/>
+            </group>
+            <text macro="container"/>
+            <group delimiter=", ">
+              <text variable="page-first"/>
+              <text variable="locator"/>
+            </group>
+            <text macro="issuance" prefix="(" suffix=")"/>
           </group>
-          <text macro="container"/>
-          <group delimiter=", ">
-            <text variable="page-first"/>
-            <text variable="locator"/>
-          </group>
-          <text macro="issuance" prefix="(" suffix=")"/>
         </group>
       </else-if>
       <else-if type="legislation">
@@ -563,16 +572,11 @@
                 </if>
                 <else>
                   <!-- Beyond the 5-note window this case reverts to a full cite.
-                       When the same field was previously rendered as the italic
-                       short form, Word keeps that italic run and a Refresh won't
-                       clear it. Nesting font-style="normal" inside an italic group
-                       forces citeproc to emit an explicit italics-off (RTF \i0), so
-                       Word resets the run. Output is plain roman in every format. -->
-                  <group font-style="italic">
-                    <group delimiter=", " font-style="normal">
-                      <text macro="source"/>
-                      <text macro="access"/>
-                    </group>
+                       The italics-off reset lives in the source macro's legal_case
+                       branch, so it applies here too. -->
+                  <group delimiter=", ">
+                    <text macro="source"/>
+                    <text macro="access"/>
                   </group>
                 </else>
               </choose>
