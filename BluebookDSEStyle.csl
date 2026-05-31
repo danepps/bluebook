@@ -23,7 +23,7 @@
     <category citation-format="note"/>
     <category field="law"/>
     <summary>The Bluebook legal citation style for law reviews, with modifications from Prof. Daniel Epps of Washington University School of Law.</summary>
-    <updated>2026-05-27T01:20:02+00:00</updated>
+    <updated>2026-05-31T00:00:00+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale>
@@ -184,17 +184,26 @@
         </choose>
       </if>
       <else-if type="legal_case">
-        <group delimiter=" ">
-          <group delimiter=", ">
-            <text variable="title"/>
-            <text variable="volume"/>
+        <!-- Wrap in font-style="normal" inside an italic group so citeproc emits an
+             explicit italics-off (RTF \i0). When a case cite is re-rendered full in
+             place after previously being the italic short form (Rule 10.9 short->full,
+             e.g. footnotes inserted past the 5-note window, or an earlier cite deleted
+             so this becomes the first reference), Word otherwise keeps the stale italic
+             run and a Refresh won't clear it. Covers every full case cite; renders plain
+             roman in text, HTML, and RTF. -->
+        <group font-style="italic">
+          <group delimiter=" " font-style="normal">
+            <group delimiter=", ">
+              <text variable="title"/>
+              <text variable="volume"/>
+            </group>
+            <text macro="container"/>
+            <group delimiter=", ">
+              <text variable="page-first"/>
+              <text variable="locator"/>
+            </group>
+            <text macro="issuance" prefix="(" suffix=")"/>
           </group>
-          <text macro="container"/>
-          <group delimiter=", ">
-            <text variable="page-first"/>
-            <text variable="locator"/>
-          </group>
-          <text macro="issuance" prefix="(" suffix=")"/>
         </group>
       </else-if>
       <else-if type="legislation">
@@ -537,7 +546,7 @@
       </else>
     </choose>
   </macro>
-  <citation et-al-min="5" et-al-use-first="1">
+  <citation et-al-min="5" et-al-use-first="1" near-note-distance="5">
     <layout suffix="" delimiter="; ">
       <choose>
         <if position="ibid-with-locator">
@@ -552,14 +561,27 @@
         <else-if position="subsequent">
           <choose>
             <if type="legal_case">
-              <group delimiter=", ">
-                <text macro="author-short"/>
-                <group delimiter=" ">
-                  <text variable="volume"/>
-                  <text variable="container-title" form="short"/>
-                  <text macro="at_page"/>
-                </group>
-              </group>
+              <choose>
+                <if position="near-note">
+                  <group delimiter=", ">
+                    <text macro="author-short"/>
+                    <group delimiter=" ">
+                      <text variable="volume"/>
+                      <text variable="container-title" form="short"/>
+                      <text macro="at_page"/>
+                    </group>
+                  </group>
+                </if>
+                <else>
+                  <!-- Beyond the 5-note window this case reverts to a full cite.
+                       The italics-off reset lives in the source macro's legal_case
+                       branch, so it applies here too. -->
+                  <group delimiter=", ">
+                    <text macro="source"/>
+                    <text macro="access"/>
+                  </group>
+                </else>
+              </choose>
             </if>
             <else-if type="legislation">
               <group delimiter=" ">

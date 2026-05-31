@@ -299,7 +299,7 @@ Item Type `Case`.
 
 > Fill the **Short Title** field on the case (e.g., `Brown`) to control how the short name appears.
 
-> **Cases aren't the style's strong suit.** Bluebook's Rule 10.9 "five-footnote rule" — use a short form only if the full cite appears in the same footnote or one of the preceding five footnotes, otherwise re-cite in full — cannot be implemented in CSL, because the style has no way to count footnote distance (see the known limitation below). The style will short-form every subsequent case cite, even ones that are 30 footnotes downstream. The author typically **enters cases and case short forms manually** in the footnote text rather than through Zotero, and that is a reasonable workflow if precise case-citation behavior matters to you.
+> **Rule 10.9's five-footnote rule now works.** Bluebook's Rule 10.9 — use a short form only if the full cite appears in the same footnote or one of the preceding five footnotes, otherwise re-cite in full — is applied automatically. The style short-forms a subsequent case cite only when the prior cite is within five footnotes; beyond that window it reverts to the full cite (`Brown v. Board of Education, 347 U.S. 483 (1954)`). This relies on Zotero's footnote-distance tracking, so it's accurate within a live document but won't survive being copied into a context where the processor can't see the surrounding notes. The author still typically **enters cases and case short forms manually** in the footnote text rather than through Zotero, and that remains a reasonable workflow if precise case-citation behavior matters to you.
 
 ### Institutional report (Bluebook Rule 15.7)
 
@@ -349,7 +349,8 @@ Lowercase keys are the convention; Zotero's parser is actually case-insensitive,
 | --------- | ------ |
 | Immediately after the same source | `*Id.*` (or `*Id.* at 495` with a pincite) |
 | Later reference to a non-case | `AUTHOR, supra note N, at X` |
-| Later reference to a case | `*Brown*, 347 U.S. at 495` |
+| Later reference to a case, within 5 footnotes (Rule 10.9) | `*Brown*, 347 U.S. at 495` |
+| Later reference to a case, more than 5 footnotes back | full cite again — `Brown v. Board of Education, 347 U.S. 483 (1954)` |
 | 5 or more authors | `First Author et al.` |
 
 ---
@@ -363,13 +364,17 @@ Lowercase keys are the convention; Zotero's parser is actually case-insensitive,
 - **No `[hereinafter shortname]` support.** Bluebook lets authors coin a custom short form on first citation (e.g., `[hereinafter Reimagining]`) and then use that short form on every subsequent cite. CSL has no native concept of author-defined short forms, so the style can't generate the `[hereinafter …]` marker or honor it on subsequent cites.
 - **Can't detect "volume number is a year."** When a journal's volume *is* a year (e.g., `2024 Wis. L. Rev. 501`), Bluebook suppresses the redundant trailing `(2024)`. This style renders both (`2024 Wis. L. Rev. 501 (2024)`), because CSL can't introspect the volume to tell whether it looks like a year.
 - **Can't detect "title ends in a numeral."** When a book or report title ends in a number (e.g., *Article III* at 45), Bluebook requires the pincite be written `, at 45` to avoid running the two numbers together. This style just emits the page number, so you may get ambiguous output like `ARTICLE III 45`.
-- **Cases: no five-footnote rule.** Bluebook Rule 10.9 says a short-form case cite (`*Brown*, 347 U.S. at 495`) may be used only if the full cite appears in the same footnote or one of the preceding five footnotes — otherwise, cite in full again. CSL has no notion of footnote distance, so this style will short-form *every* subsequent case cite, no matter how far back the full cite was. For precise case-citation behavior, many authors (including this one) enter cases and case short forms manually in the footnote text rather than via Zotero.
+- **Cases: five-footnote rule has limits.** Bluebook Rule 10.9 says a short-form case cite (`*Brown*, 347 U.S. at 495`) may be used only if the full cite appears in the same footnote or one of the preceding five footnotes — otherwise, cite in full again. The style now applies this automatically via Zotero's footnote-distance tracking: cases revert to a full cite once the prior cite falls outside the five-footnote window. The catch is that this depends on the processor seeing the surrounding notes — it's reliable in a live document but not when citation text is copied out of context, and it counts footnote distance rather than the exact "same-or-preceding-five" set Bluebook describes. For full control, many authors (including this one) still enter cases and case short forms manually in the footnote text rather than via Zotero.
 
 > **Coming later.** Several of these gaps (hereinafter, volume-as-year, title-ends-in-numeral) are on the roadmap for the companion Zotero plug-in — see **[danepps/zotero](https://github.com/danepps/zotero)**. The plug-in can introspect the data and post-process citation output in ways that a pure CSL file cannot.
 
 ---
 
 ## Changelog
+
+### May 2026 — Rule 10.9 five-footnote rule
+
+- **Case short forms now respect Bluebook Rule 10.9's five-footnote rule.** A subsequent case cite uses the short form (`*Brown*, 347 U.S. at 495`) only when the prior cite is within five footnotes; beyond that window it reverts to a full cite. Implemented via citeproc's footnote-distance tracking (`near-note-distance="5"`). Full case cites also now emit an explicit italics-off so a short-form-then-full re-render doesn't leave a stale italic run in Word.
 
 ### May 2026 — podcasts
 
