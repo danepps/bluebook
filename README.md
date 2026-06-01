@@ -91,7 +91,7 @@ A few principles that apply across every item type. Read these once — they'll 
 
 These aren't disagreements with the Bluebook — they're tweaks to the underlying CSL to make it render more cleanly in practice.
 
-- **No trailing period.** The base style emits a period at the end of each citation. That interferes with chained footnote cites (where multiple sources are joined with semicolons, and the period belongs to the footnote sentence, not to any single cite). This style drops the trailing period and expects you to add it in context.
+- **No trailing period.** The base style emits a period at the end of each citation; this style drops it. Rationale and downstream effects are covered in [How the style works](#how-the-style-works-things-everyone-should-know) above — short version: it lets you type explanatory parentheticals immediately after the cite without first having to delete an auto-period, and it keeps semicolon-chained footnote cites clean.
 - **`et al.` at 5 authors**, not 3. A personal preference of the author — the 3-author threshold produces a lot of `X et al.` in footnotes where spelling out all three would read better.
 
 ---
