@@ -73,13 +73,14 @@ See what changed between versions in the [commit history](https://github.com/dan
 
 A few principles that apply across every item type. Read these once — they'll explain most "why is it doing that?" questions.
 
-- **No trailing period.** Output ends without a final period. In a footnote, type the period yourself; inline, let the surrounding sentence punctuate. This is deliberate — law-review footnotes often chain multiple citations with semicolons, and the sentence-ending period belongs to the footnote, not to any single citation.
+- **No trailing period.** Output ends without a final period. In a footnote, type the period yourself; inline, let the surrounding sentence punctuate. This is a deliberate change Prof. Epps made to the base Bluebook CSL style — chiefly to make it easy to type an explanatory parenthetical right after the citation (`Brown v. Bd. of Educ., 347 U.S. 483 (1954) (holding that ...)`) without having to delete an auto-inserted period first. It also keeps things clean when law-review footnotes chain multiple citations with semicolons — the sentence-ending period belongs to the footnote, not to any single citation.
 - **Note-style, footnote-oriented.** The style is built for law-review footnote citations, not inline author-date parentheticals. Insert citations with Zotero's "Insert Footnote" (in Word) or equivalent.
 - **Italics and small caps are rich-text formatting.** The style emits *italic* / SMALL CAPS as styled-text attributes. Word, LibreOffice, Google Docs, and Pages render them correctly. Plain-text contexts (Markdown, terminal, some email clients) will show unformatted text.
 - **Short forms are automatic, based on citation position.** The style looks at whether a citation is first or subsequent:
   - Same source immediately prior → `*Id.*` (with pincite: `*Id.* at 495`)
   - Later reference to a non-case → `AUTHOR, *supra* note N, at X`
-  - Later reference to a case → Rule 10.9 short form: `*Brown*, 347 U.S. at 495`
+  - Later reference to a case, **within five footnotes** (Rule 10.9) → short form: `*Brown*, 347 U.S. at 495`
+  - Later reference to a case **more than five footnotes back** → reverts to the full cite: `Brown v. Board of Education, 347 U.S. 483, 495 (1954)`
 - **The style renders what's in the data — it doesn't look anything up.** If an output is wrong, check the Zotero fields on the item first. The style doesn't validate that `347 U.S. 483` exists or that a journal volume makes sense — it simply formats whatever you typed.
 - **Journal abbreviations come from each item's `Journal Abbr` field.** The style reads the Bluebook-style abbreviation directly from the **Journal Abbr** field on the Zotero item (e.g., `Harv. L. Rev.`, `Yale L.J.`, `Stan. L. Rev.`). You must fill this in on every journal article when you create the item — there is no central list, and the style does not compute it from the full journal name. **Do not enable Zotero's MEDLINE abbreviation setting** (Preferences → Cite) — MEDLINE uses a different abbreviation scheme (biomedical, no periods) that is not Bluebook-compliant.
 - **Signals are handled by a separate plug-in.** *See*, *See also*, *Cf.*, *But see*, *Contra*, etc. are inserted by **[danepps/zotero](https://github.com/danepps/zotero)** — install that alongside this style if you cite with signals. You **can** type signals manually into the footnote text (or into Zotero's **Prefix** field) instead of using the plug-in, but there's a catch: Bluebook wants `id.` lowercase when it follows a signal (`See id.` at 5, not `See Id.` at 5). The style only knows to drop the capital when the signal is supplied through the plug-in or the Prefix field — a signal you type directly into the Word document leaves the style thinking `Id.` starts a new sentence, and it will be capitalized. Using the plug-in (or, failing that, the Prefix field) is the only way to get signal-then-`id.` rendered correctly.
@@ -90,7 +91,7 @@ A few principles that apply across every item type. Read these once — they'll 
 
 These aren't disagreements with the Bluebook — they're tweaks to the underlying CSL to make it render more cleanly in practice.
 
-- **No trailing period.** The base style emits a period at the end of each citation. That interferes with chained footnote cites (where multiple sources are joined with semicolons, and the period belongs to the footnote sentence, not to any single cite). This style drops the trailing period and expects you to add it in context.
+- **No trailing period.** The base style emits a period at the end of each citation; this style drops it. Rationale and downstream effects are covered in [How the style works](#how-the-style-works-things-everyone-should-know) above — short version: it lets you type explanatory parentheticals immediately after the cite without first having to delete an auto-period, and it keeps semicolon-chained footnote cites clean.
 - **`et al.` at 5 authors**, not 3. A personal preference of the author — the 3-author threshold produces a lot of `X et al.` in footnotes where spelling out all three would read better.
 
 ---
@@ -404,7 +405,10 @@ Lowercase keys are the convention; Zotero's parser is actually case-insensitive,
 
 ## Feedback / bug reports
 
-Email Prof. Epps at <epps@wustl.edu>.
+Two ways to report:
+
+- **Email** Prof. Epps at <epps@wustl.edu>.
+- **Open a GitHub issue** at <https://github.com/danepps/bluebook/issues> — click *New issue*, give it a short title, and paste the details below. (A free GitHub account is required to file one.)
 
 When reporting a bad render, paste the output you got, the output you expected, and (if possible) a screenshot of the Zotero item so the fields can be verified.
 
