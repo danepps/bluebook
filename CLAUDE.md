@@ -68,7 +68,7 @@ Don't try to implement these in pure CSL. Point users at the plug-in instead.
 
 ## Bug reports
 
-Route to **email Prof. Epps at <epps@wustl.edu>**, not GitHub issues.
+Two accepted routes: **email Prof. Epps at <epps@wustl.edu>** or **open a GitHub issue** at <https://github.com/danepps/bluebook/issues>. README documents both.
 
 ## Current status (April 2026)
 
