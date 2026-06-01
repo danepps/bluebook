@@ -275,6 +275,14 @@ Item Type `Book`. Author and title render in **small caps** per Rule 15. 🔴 Re
 
 **Output:** `JANE DOE, THE TREATISE 101 (2024).`
 
+> **Edition field — type just the ordinal, not the word `ed.`** The style supplies `ed.` automatically, so put **`3d`**, **`4th`**, **`2d`**, etc. in Zotero's Edition field — not `3d ed.` (which would render `3d ed. ed.`). For a revised edition, type just **`rev.`** (renders `(rev. ed. 2024)`). Examples:
+>
+> | Edition field value | Output |
+> | --- | --- |
+> | `3d` | `JANE DOE, THE TREATISE 101 (3d ed. 2024).` |
+> | `4th` | `JANE DOE, THE TREATISE 101 (4th ed. 2024).` |
+> | `rev.` | `JANE DOE, THE TREATISE 101 (rev. ed. 2024).` |
+
 ### Book chapter / paper in a book
 
 Item Type `Book Section` (Zotero) maps to CSL `chapter`. 🔴 Required: Author, Title (chapter), Book Title, Date. ⚪ Editor (adds the `ed.` parenthetical).
