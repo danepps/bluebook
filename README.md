@@ -73,7 +73,7 @@ See what changed between versions in the [commit history](https://github.com/dan
 
 A few principles that apply across every item type. Read these once — they'll explain most "why is it doing that?" questions.
 
-- **No trailing period.** Output ends without a final period. In a footnote, type the period yourself; inline, let the surrounding sentence punctuate. This is deliberate — law-review footnotes often chain multiple citations with semicolons, and the sentence-ending period belongs to the footnote, not to any single citation.
+- **No trailing period.** Output ends without a final period. In a footnote, type the period yourself; inline, let the surrounding sentence punctuate. This is a deliberate change Prof. Epps made to the base Bluebook CSL style — chiefly to make it easy to type an explanatory parenthetical right after the citation (`Brown v. Bd. of Educ., 347 U.S. 483 (1954) (holding that ...)`) without having to delete an auto-inserted period first. It also keeps things clean when law-review footnotes chain multiple citations with semicolons — the sentence-ending period belongs to the footnote, not to any single citation.
 - **Note-style, footnote-oriented.** The style is built for law-review footnote citations, not inline author-date parentheticals. Insert citations with Zotero's "Insert Footnote" (in Word) or equivalent.
 - **Italics and small caps are rich-text formatting.** The style emits *italic* / SMALL CAPS as styled-text attributes. Word, LibreOffice, Google Docs, and Pages render them correctly. Plain-text contexts (Markdown, terminal, some email clients) will show unformatted text.
 - **Short forms are automatic, based on citation position.** The style looks at whether a citation is first or subsequent:

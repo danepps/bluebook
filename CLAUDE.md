@@ -33,7 +33,7 @@ A CSL 1.0 note-style **citation style** for Zotero implementing Bluebook legal c
 These have been debated and settled. Don't "fix" them without asking.
 
 - **`et-al-min="5"`** — the author prefers listing up to four names before abbreviating, even though Bluebook Rules 15.1/16.1 specify three.
-- **No trailing period** on output. Removed because the base CSL style's trailing period interferes with chained footnote cites joined by semicolons. Users add the period in context.
+- **No trailing period** on output. Author-introduced change from the base Bluebook CSL: primarily to let users type explanatory parentheticals right after the citation without first having to delete an auto-inserted period; also keeps semicolon-chained footnote cites clean. Users add the period in context.
 - **URLs only render for internet-first item types**: `webpage`, `post-weblog`, `article`, `article-newspaper`, `article-magazine`, and `article-journal` *only when `status` is set* (forthcoming articles).
 - **"Last visited" parenthetical is gated to `type="webpage"`** only. Blog posts, news, etc. have their own publication dates.
 - **Newspaper/magazine URL decision matrix** in `source` macro:
