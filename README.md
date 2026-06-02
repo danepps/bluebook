@@ -403,11 +403,6 @@ Lowercase keys are the convention; Zotero's parser is actually case-insensitive,
 - **Forthcoming journal articles** now use `(manuscript at N)` for the pincite on both first-cite and `supra` short-cite, when `status: forthcoming` (or any non-empty `status`) is set in Extra. So `Jane Doe, *Title*, 137 Harv. L. Rev. (forthcoming 2027) (manuscript at 12)` and the corresponding `Doe, *supra* note 3 (manuscript at 12)`.
 - URL emission enabled for forthcoming journal articles.
 
-### Earlier (2025–early 2026)
-
-- **Genre designation** for student notes / comments / etc. on journal articles (Extra: `genre: Note`); rendered title-cased between author and title.
-- **Legislation** support (statutes, bills, regulations) graduated from experimental.
-- Various small fixes — Oxford-comma-before-ampersand in author lists, anonymous-article handling, `<bibliography>` element added.
 
 ---
 
