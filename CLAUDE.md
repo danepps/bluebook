@@ -48,7 +48,7 @@ These have been debated and settled. Don't "fix" them without asking.
 
 ## Out of scope for this CSL (delegated to companion plug-in)
 
-The [`danepps/zotero`](https://github.com/danepps/zotero) Zotero plug-in handles what CSL can't:
+The [`danepps/zotero`](https://github.com/danepps/zotero) Zotero plug-in (**currently in beta**) handles what CSL can't:
 
 - Introductory signals (*See*, *Cf.*, *But see*, *Contra*, etc.)
 - `[hereinafter shortname]` coined short forms
@@ -57,7 +57,7 @@ The [`danepps/zotero`](https://github.com/danepps/zotero) Zotero plug-in handles
 
 (Rule 10.9's five-footnote rule for case short forms used to live here — it's now handled in pure CSL via `near-note-distance="5"`; see the CSL design choices section.)
 
-Don't try to implement these in pure CSL. Point users at the plug-in instead.
+Don't try to implement these in pure CSL. Point users at the plug-in instead. The README's "Known limitations" section flags the hereinafter / volume-as-year / title-numeral bullets as plug-in-fixed and notes the beta status — keep that and this section in sync.
 
 ## Author workflow preferences
 
