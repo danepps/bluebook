@@ -16,6 +16,8 @@ One CSL style file, installable in Zotero:
 
 > **Note on signals.** Bluebook introductory signals (*See*, *See also*, *Cf.*, *But see*, etc.) are **not** produced by this style. They are inserted by a companion Zotero plug-in: **[danepps/zotero](https://github.com/danepps/zotero)** — install that alongside this style if you use signals.
 
+> **Note on citation fixes.** Some Bluebook rules can't be expressed in a pure CSL style (e.g., `[hereinafter]` short forms). Those are applied by the companion **[Bluebook Citations Fixer](https://github.com/danepps/zotero/tree/main/bluebook-citations-fixer)** plug-in (part of **[danepps/zotero](https://github.com/danepps/zotero)**) — install it alongside this style for the full feature set.
+
 ---
 
 ## Install
