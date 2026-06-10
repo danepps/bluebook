@@ -23,7 +23,7 @@
     <category citation-format="note"/>
     <category field="law"/>
     <summary>The Bluebook legal citation style for law reviews, with modifications from Prof. Daniel Epps of Washington University School of Law.</summary>
-    <updated>2026-05-27T01:20:02+00:00</updated>
+    <updated>2026-05-31T00:00:00+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale>
@@ -160,7 +160,9 @@
               </group>
               <group prefix="(" suffix=")" delimiter=" ">
                 <text variable="status"/>
-                <date variable="issued" date-parts="year" form="text"/>
+                <date variable="issued">
+                  <date-part name="year"/>
+                </date>
               </group>
               <text variable="locator" prefix="(manuscript at " suffix=")"/>
             </group>
@@ -174,20 +176,9 @@
                   <text macro="container"/>
                   <text variable="page-first"/>
                 </group>
-                <text variable="locator"/>
+                <text macro="pincite"/>
               </group>
-              <!-- Year, plus a range-end year when present. citeproc has no real
-                   "season" date-part, so a second year that Zotero parked in the
-                   season slot (e.g. a HeinOnline import of "2021-2022" exports as
-                   year=2021 + season="2022") is emitted via the "month" date-part,
-                   producing (2021-2022). A true date range renders the same way.
-                   Caveat: a genuine season/month here would surface too, e.g.
-                   (2020-Summer); rare for law journals, and fixed per item by
-                   clearing the season or overriding `issued` in Zotero's Extra. -->
-              <date variable="issued" prefix="(" suffix=")">
-                <date-part name="year"/>
-                <date-part name="month" form="numeric" prefix="–"/>
-              </date>
+              <text macro="issuance" prefix="(" suffix=")"/>
             </group>
           </else>
         </choose>
@@ -209,7 +200,7 @@
             <text macro="container"/>
             <group delimiter=", ">
               <text variable="page-first"/>
-              <text variable="locator"/>
+              <text macro="pincite"/>
             </group>
             <text macro="issuance" prefix="(" suffix=")"/>
           </group>
@@ -256,7 +247,7 @@
     <else-if variable="collection-number number" match="any">
       <group>
         <text variable="title" font-style="italic"/>
-        <text variable="locator" prefix=" "/>
+        <text macro="pincite" prefix=" "/>
         <group prefix=" (" suffix=")">
           <group delimiter=", ">
             <choose>
@@ -298,7 +289,7 @@
     <else>
       <group>
         <text variable="title"/>
-        <text variable="locator" prefix=" "/>
+        <text macro="pincite" prefix=" "/>
         <group prefix=" (" suffix=")">
           <date variable="issued">
             <date-part name="month" form="short" suffix=" "/>
@@ -327,14 +318,14 @@
 <else-if type="report">
   <group>
     <text variable="title" font-variant="small-caps"/>
-    <text variable="locator" prefix=" "/>
+    <text macro="pincite" prefix=" "/>
     <text macro="issuance" prefix=" (" suffix=")"/>
   </group>
 </else-if>
 <else-if type="thesis manuscript document" match="any">
   <group>
     <text variable="title"/>
-    <text variable="locator" prefix=" "/>
+    <text macro="pincite" prefix=" "/>
     <group prefix=" (" suffix=")">
       <date variable="issued">
         <date-part name="month" form="short" suffix=" "/>
@@ -403,12 +394,12 @@
           <text macro="container"/>
         </group>
         <text variable="page-first"/>
-        <text variable="locator" prefix=", "/>
+        <text macro="pincite" prefix=", "/>
         <text macro="issuance" prefix=" (" suffix=")"/>
       </else-if>
       <else-if type="book">
         <text variable="title" font-variant="small-caps"/>
-        <text variable="locator" prefix=" "/>
+        <text macro="pincite" prefix=" "/>
         <text macro="issuance" prefix=" (" suffix=")"/>
       </else-if>
       <else-if type="song broadcast" match="any">
@@ -465,7 +456,7 @@
             <text variable="volume"/>
             <text macro="container"/>
             <text variable="page-first"/>
-            <text variable="locator"/>
+            <text macro="pincite"/>
             <text macro="issuance" prefix="(" suffix=")"/>
           </group>
         </group>
@@ -528,10 +519,35 @@
     </choose>
   </macro>
   <macro name="at_page">
-    <group delimiter=" ">
-      <text value="at"/>
-      <text variable="locator"/>
-    </group>
+    <!-- Rules 3.3-3.4: "at" only introduces page pincites. Section/paragraph
+         (and other) locators render via their symbol term with no "at"
+         (Id. § 4, Id. ¶¶ 12-13) - citeproc pluralizes the symbol for ranges. -->
+    <choose>
+      <if locator="page">
+        <group delimiter=" ">
+          <text value="at"/>
+          <text variable="locator"/>
+        </group>
+      </if>
+      <else>
+        <text macro="pincite"/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="pincite">
+    <!-- Bare pincite (no "at"): page locators render as the bare number
+         (TITLE 25), anything else gets its symbol label (TITLE § 5). -->
+    <choose>
+      <if locator="page">
+        <text variable="locator"/>
+      </if>
+      <else>
+        <group delimiter=" ">
+          <label variable="locator" form="symbol"/>
+          <text variable="locator"/>
+        </group>
+      </else>
+    </choose>
   </macro>
   <macro name="container">
     <choose>
