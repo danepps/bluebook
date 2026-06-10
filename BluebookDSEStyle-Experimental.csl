@@ -23,7 +23,7 @@
     <category citation-format="note"/>
     <category field="law"/>
     <summary>The Bluebook legal citation style for law reviews, with modifications from Prof. Daniel Epps of Washington University School of Law.</summary>
-    <updated>2026-05-27T01:20:02+00:00</updated>
+    <updated>2026-05-31T00:00:00+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale>
@@ -160,7 +160,9 @@
               </group>
               <group prefix="(" suffix=")" delimiter=" ">
                 <text variable="status"/>
-                <date variable="issued" date-parts="year" form="text"/>
+                <date variable="issued">
+                  <date-part name="year"/>
+                </date>
               </group>
               <text variable="locator" prefix="(manuscript at " suffix=")"/>
             </group>
@@ -176,18 +178,7 @@
                 </group>
                 <text variable="locator"/>
               </group>
-              <!-- Year, plus a range-end year when present. citeproc has no real
-                   "season" date-part, so a second year that Zotero parked in the
-                   season slot (e.g. a HeinOnline import of "2021-2022" exports as
-                   year=2021 + season="2022") is emitted via the "month" date-part,
-                   producing (2021-2022). A true date range renders the same way.
-                   Caveat: a genuine season/month here would surface too, e.g.
-                   (2020-Summer); rare for law journals, and fixed per item by
-                   clearing the season or overriding `issued` in Zotero's Extra. -->
-              <date variable="issued" prefix="(" suffix=")">
-                <date-part name="year"/>
-                <date-part name="month" form="numeric" prefix="–"/>
-              </date>
+              <text macro="issuance" prefix="(" suffix=")"/>
             </group>
           </else>
         </choose>
