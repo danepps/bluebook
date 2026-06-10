@@ -423,4 +423,4 @@ When reporting a bad render, paste the output you got, the output you expected, 
 
 - Original Bluebook CSL by **Bruce D'Arcus** and **Nancy Sims**, with contributions from **Patrick O'Brien**.
 - Modifications for this fork by **Dan Epps** (<epps@wustl.edu>).
-- Licensed under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+- Licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). (The original style is CC BY-SA 3.0; this fork is licensed under 4.0 as a later version with the same license elements, as §4(b) of BY-SA 3.0 permits for adaptations.)
