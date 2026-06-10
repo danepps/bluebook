@@ -176,7 +176,7 @@
                   <text macro="container"/>
                   <text variable="page-first"/>
                 </group>
-                <text variable="locator"/>
+                <text macro="pincite"/>
               </group>
               <text macro="issuance" prefix="(" suffix=")"/>
             </group>
@@ -200,7 +200,7 @@
             <text macro="container"/>
             <group delimiter=", ">
               <text variable="page-first"/>
-              <text variable="locator"/>
+              <text macro="pincite"/>
             </group>
             <text macro="issuance" prefix="(" suffix=")"/>
           </group>
@@ -247,7 +247,7 @@
     <else-if variable="collection-number number" match="any">
       <group>
         <text variable="title" font-style="italic"/>
-        <text variable="locator" prefix=" "/>
+        <text macro="pincite" prefix=" "/>
         <group prefix=" (" suffix=")">
           <group delimiter=", ">
             <choose>
@@ -289,7 +289,7 @@
     <else>
       <group>
         <text variable="title"/>
-        <text variable="locator" prefix=" "/>
+        <text macro="pincite" prefix=" "/>
         <group prefix=" (" suffix=")">
           <date variable="issued">
             <date-part name="month" form="short" suffix=" "/>
@@ -318,14 +318,14 @@
 <else-if type="report">
   <group>
     <text variable="title" font-variant="small-caps"/>
-    <text variable="locator" prefix=" "/>
+    <text macro="pincite" prefix=" "/>
     <text macro="issuance" prefix=" (" suffix=")"/>
   </group>
 </else-if>
 <else-if type="thesis manuscript document" match="any">
   <group>
     <text variable="title"/>
-    <text variable="locator" prefix=" "/>
+    <text macro="pincite" prefix=" "/>
     <group prefix=" (" suffix=")">
       <date variable="issued">
         <date-part name="month" form="short" suffix=" "/>
@@ -394,12 +394,12 @@
           <text macro="container"/>
         </group>
         <text variable="page-first"/>
-        <text variable="locator" prefix=", "/>
+        <text macro="pincite" prefix=", "/>
         <text macro="issuance" prefix=" (" suffix=")"/>
       </else-if>
       <else-if type="book">
         <text variable="title" font-variant="small-caps"/>
-        <text variable="locator" prefix=" "/>
+        <text macro="pincite" prefix=" "/>
         <text macro="issuance" prefix=" (" suffix=")"/>
       </else-if>
       <else-if type="song broadcast" match="any">
@@ -456,7 +456,7 @@
             <text variable="volume"/>
             <text macro="container"/>
             <text variable="page-first"/>
-            <text variable="locator"/>
+            <text macro="pincite"/>
             <text macro="issuance" prefix="(" suffix=")"/>
           </group>
         </group>
@@ -519,10 +519,35 @@
     </choose>
   </macro>
   <macro name="at_page">
-    <group delimiter=" ">
-      <text value="at"/>
-      <text variable="locator"/>
-    </group>
+    <!-- Rules 3.3-3.4: "at" only introduces page pincites. Section/paragraph
+         (and other) locators render via their symbol term with no "at"
+         (Id. § 4, Id. ¶¶ 12-13) - citeproc pluralizes the symbol for ranges. -->
+    <choose>
+      <if locator="page">
+        <group delimiter=" ">
+          <text value="at"/>
+          <text variable="locator"/>
+        </group>
+      </if>
+      <else>
+        <text macro="pincite"/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="pincite">
+    <!-- Bare pincite (no "at"): page locators render as the bare number
+         (TITLE 25), anything else gets its symbol label (TITLE § 5). -->
+    <choose>
+      <if locator="page">
+        <text variable="locator"/>
+      </if>
+      <else>
+        <group delimiter=" ">
+          <label variable="locator" form="symbol"/>
+          <text variable="locator"/>
+        </group>
+      </else>
+    </choose>
   </macro>
   <macro name="container">
     <choose>
