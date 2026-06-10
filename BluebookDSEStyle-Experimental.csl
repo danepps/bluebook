@@ -504,10 +504,22 @@
             <group delimiter=", ">
               <text macro="editor-translator"/>
               <group delimiter=" ">
-                <group delimiter=" ">
-                  <text variable="edition"/>
-                  <label variable="edition" form="short"/>
-                </group>
+                <!-- Rule 15.4: append "ed." only when the Edition field is a
+                     bare number/ordinal (3, 3d, 11th). Anything else (rev. ed.,
+                     2d rev. ed.) is rendered verbatim - CSL cannot inspect
+                     content beyond the numeric test, so non-numeric values
+                     must contain the complete Bluebook text. -->
+                <choose>
+                  <if is-numeric="edition">
+                    <group delimiter=" ">
+                      <text variable="edition"/>
+                      <label variable="edition" form="short"/>
+                    </group>
+                  </if>
+                  <else>
+                    <text variable="edition"/>
+                  </else>
+                </choose>
                 <date variable="issued">
                   <date-part name="year"/>
                 </date>
