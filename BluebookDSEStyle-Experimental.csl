@@ -650,6 +650,18 @@
                         </else-if>
                       </choose>
                     </else-if>
+                    <!-- Rule 4.2: authorless items need a short title before
+                         "supra" - otherwise the cite is a bare "supra note N".
+                         Font tracks the full-cite rendering of each type. -->
+                    <else-if type="book graphic motion_picture report" match="any">
+                      <text variable="title" form="short" font-variant="small-caps"/>
+                    </else-if>
+                    <else-if type="article manuscript thesis document" match="any">
+                      <text variable="title" form="short"/>
+                    </else-if>
+                    <else>
+                      <text variable="title" form="short" font-style="italic"/>
+                    </else>
                   </choose>
                 </group>
                 <group delimiter=" ">
