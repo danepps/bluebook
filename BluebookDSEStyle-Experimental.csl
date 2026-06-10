@@ -207,22 +207,43 @@
         </group>
       </else-if>
       <else-if type="legislation">
+        <!-- Rule 12. Codified: Title, 42 U.S.C. § 12101 (Year) - leave Date
+             Enacted empty for the current official U.S.C. (Rule 12.3.2, 21st
+             ed.), fill it for state/unofficial codes. Session law (Pages set):
+             Title, Pub. L. No. N, § S, 124 Stat. 119 (Year). The section
+             symbol pluralizes to §§ for ranges. Publisher parentheticals for
+             unofficial codes (West etc.) are not supported. -->
         <group delimiter=" ">
           <group delimiter=", ">
-            <group>
-              <text variable="title" text-case="title"/>
-              <text macro="issuance" prefix=" of "/>
-            </group>
-            <text variable="number"/>
-            <group delimiter=" ">
-              <text variable="volume"/>
-              <text macro="container"/>
-              <group delimiter=" ">
-                <text value="§"/>
-                <text variable="section"/>
-              </group>
-            </group>
+            <text variable="title" text-case="title"/>
+            <text variable="number" prefix="Pub. L. No. "/>
+            <choose>
+              <if variable="page-first">
+                <group delimiter=" ">
+                  <label variable="section" form="symbol"/>
+                  <text variable="section"/>
+                </group>
+                <group delimiter=" ">
+                  <text variable="volume"/>
+                  <text macro="container"/>
+                  <text variable="page-first"/>
+                </group>
+              </if>
+              <else>
+                <group delimiter=" ">
+                  <text variable="volume"/>
+                  <text macro="container"/>
+                  <group delimiter=" ">
+                    <label variable="section" form="symbol"/>
+                    <text variable="section"/>
+                  </group>
+                </group>
+              </else>
+            </choose>
           </group>
+          <date variable="issued" prefix="(" suffix=")">
+            <date-part name="year"/>
+          </date>
         </group>
       </else-if>
 <else-if type="article">
@@ -625,7 +646,7 @@
                 <text variable="volume"/>
                 <text variable="container-title" form="short"/>
                 <group delimiter=" ">
-                  <text value="§"/>
+                  <label variable="section" form="symbol"/>
                   <text variable="section"/>
                 </group>
               </group>
