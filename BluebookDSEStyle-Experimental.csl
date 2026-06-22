@@ -212,11 +212,21 @@
              ed.), fill it for state/unofficial codes. Session law (Pages set):
              Title, Pub. L. No. N, § S, 124 Stat. 119 (Year). The section
              symbol pluralizes to §§ for ranges. Publisher parentheticals for
-             unofficial codes (West etc.) are not supported. -->
+             unofficial codes (West etc.) are not supported. Pre-1957 chaptered
+             session laws (Rule 12.4) take "ch. N" instead of a public law
+             number; Zotero's Statute item has no native field for this, so set
+             "chapter-number: N" in the Extra field. -->
         <group delimiter=" ">
           <group delimiter=", ">
             <text variable="title" text-case="title"/>
-            <text variable="number" prefix="Pub. L. No. "/>
+            <choose>
+              <if variable="number">
+                <text variable="number" prefix="Pub. L. No. "/>
+              </if>
+              <else-if variable="chapter-number">
+                <text variable="chapter-number" prefix="ch. "/>
+              </else-if>
+            </choose>
             <choose>
               <if variable="page-first">
                 <group delimiter=" ">
