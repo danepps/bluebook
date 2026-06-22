@@ -289,13 +289,16 @@ Item Type `Book`. Author and title render in **small caps** per Rule 15. 🔴 Re
 
 **Output:** `JANE DOE, THE TREATISE 101 (2024).`
 
-> **Edition field — type just the ordinal, not the word `ed.`** The style supplies `ed.` automatically, so put **`3d`**, **`4th`**, **`2d`**, etc. in Zotero's Edition field — not `3d ed.` (which would render `3d ed. ed.`). For a revised edition, type just **`rev.`** (renders `(rev. ed. 2024)`). Examples:
+> **Edition field — numbered editions take just the ordinal; everything else is typed in full.** The style appends `ed.` automatically **only** when the Edition field is a bare number or ordinal (`3`, `3d`, `11th`), so put **`3d`**, **`4th`**, **`2d`**, etc. — not `3d ed.` (which would render `3d ed. ed.`). For any non-numbered edition (revised, abridged, etc.) the style renders the field **verbatim**, so type the **complete** Bluebook text including the word `ed.` — e.g. **`rev. ed.`**, **`2d rev. ed.`**, **`abr. ed.`** Examples:
 >
 > | Edition field value | Output |
 > | --- | --- |
 > | `3d` | `JANE DOE, THE TREATISE 101 (3d ed. 2024).` |
 > | `4th` | `JANE DOE, THE TREATISE 101 (4th ed. 2024).` |
-> | `rev.` | `JANE DOE, THE TREATISE 101 (rev. ed. 2024).` |
+> | `rev. ed.` | `JANE DOE, THE TREATISE 101 (rev. ed. 2024).` |
+> | `2d rev. ed.` | `JANE DOE, THE TREATISE 101 (2d rev. ed. 2024).` |
+>
+> **Migration note:** earlier versions told you to type a bare **`rev.`** for revised editions. That now renders `(rev. 2024)` — re-enter any such items as **`rev. ed.`** (or the full Bluebook form) to restore the `ed.`
 
 ### Book chapter / paper in a book
 
@@ -348,7 +351,9 @@ For commission reports, GAO/CRS reports, agency reports, and other institutional
 
 ### Statute / bill / regulation
 
-These use Zotero's `Statute` / `Bill` / `Regulation` item types. They're currently passed through generic rendering — heavy statute users should double-check output; open an issue if a specific format is off.
+**Statutes** (Item Type `Statute`) have a dedicated Rule 12 branch. Type the act name in full in **Name of Act** (including `of 1990` when official); **Code** / **Code Number** map to the reporter / volume; put the section number in **Section** (the style supplies the `§` symbol and pluralizes to `§§` for ranges). Leave **Date Enacted** empty for the current official U.S.C. (Rule 12.3.2, 21st ed.); fill it for state or unofficial codes. Setting **Pages** switches to the session-law form (`Name, Pub. L. No. N, § S, 124 Stat. 119 (Year)`), reading the public law number from **Public Law Number**; for a pre-1957 chaptered law that has no public law number, set `chapter-number: N` in **Extra** to render `ch. N`. Publisher parentheticals for unofficial codes (`(West 2020)`) are not supported.
+
+**Bills** and **regulations** (`Bill` / `Regulation`) are still passed through generic rendering — double-check output and open an issue if a specific format is off.
 
 ---
 
