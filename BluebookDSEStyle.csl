@@ -176,7 +176,7 @@
                   <text macro="container"/>
                   <text variable="page-first"/>
                 </group>
-                <text variable="locator"/>
+                <text macro="pincite"/>
               </group>
               <text macro="issuance" prefix="(" suffix=")"/>
             </group>
@@ -200,29 +200,60 @@
             <text macro="container"/>
             <group delimiter=", ">
               <text variable="page-first"/>
-              <text variable="locator"/>
+              <text macro="pincite"/>
             </group>
             <text macro="issuance" prefix="(" suffix=")"/>
           </group>
         </group>
       </else-if>
       <else-if type="legislation">
+        <!-- Rule 12. Codified: Title, 42 U.S.C. § 12101 (Year) - leave Date
+             Enacted empty for the current official U.S.C. (Rule 12.3.2, 21st
+             ed.), fill it for state/unofficial codes. Session law (Pages set):
+             Title, Pub. L. No. N, § S, 124 Stat. 119 (Year). The section
+             symbol pluralizes to §§ for ranges. Publisher parentheticals for
+             unofficial codes (West etc.) are not supported. Pre-1957 chaptered
+             session laws (Rule 12.4) take "ch. N" instead of a public law
+             number; Zotero's Statute item has no native field for this, so set
+             "chapter-number: N" in the Extra field. -->
         <group delimiter=" ">
           <group delimiter=", ">
-            <group>
-              <text variable="title" text-case="title"/>
-              <text macro="issuance" prefix=" of "/>
-            </group>
-            <text variable="number"/>
-            <group delimiter=" ">
-              <text variable="volume"/>
-              <text macro="container"/>
-              <group delimiter=" ">
-                <text value="§"/>
-                <text variable="section"/>
-              </group>
-            </group>
+            <text variable="title" text-case="title"/>
+            <choose>
+              <if variable="number">
+                <text variable="number" prefix="Pub. L. No. "/>
+              </if>
+              <else-if variable="chapter-number">
+                <text variable="chapter-number" prefix="ch. "/>
+              </else-if>
+            </choose>
+            <choose>
+              <if variable="page-first">
+                <group delimiter=" ">
+                  <label variable="section" form="symbol"/>
+                  <text variable="section"/>
+                </group>
+                <group delimiter=" ">
+                  <text variable="volume"/>
+                  <text macro="container"/>
+                  <text variable="page-first"/>
+                </group>
+              </if>
+              <else>
+                <group delimiter=" ">
+                  <text variable="volume"/>
+                  <text macro="container"/>
+                  <group delimiter=" ">
+                    <label variable="section" form="symbol"/>
+                    <text variable="section"/>
+                  </group>
+                </group>
+              </else>
+            </choose>
           </group>
+          <date variable="issued" prefix="(" suffix=")">
+            <date-part name="year"/>
+          </date>
         </group>
       </else-if>
 <else-if type="article">
@@ -247,7 +278,7 @@
     <else-if variable="collection-number number" match="any">
       <group>
         <text variable="title" font-style="italic"/>
-        <text variable="locator" prefix=" "/>
+        <text macro="pincite" prefix=" "/>
         <group prefix=" (" suffix=")">
           <group delimiter=", ">
             <choose>
@@ -289,7 +320,7 @@
     <else>
       <group>
         <text variable="title"/>
-        <text variable="locator" prefix=" "/>
+        <text macro="pincite" prefix=" "/>
         <group prefix=" (" suffix=")">
           <date variable="issued">
             <date-part name="month" form="short" suffix=" "/>
@@ -318,14 +349,14 @@
 <else-if type="report">
   <group>
     <text variable="title" font-variant="small-caps"/>
-    <text variable="locator" prefix=" "/>
+    <text macro="pincite" prefix=" "/>
     <text macro="issuance" prefix=" (" suffix=")"/>
   </group>
 </else-if>
 <else-if type="thesis manuscript document" match="any">
   <group>
     <text variable="title"/>
-    <text variable="locator" prefix=" "/>
+    <text macro="pincite" prefix=" "/>
     <group prefix=" (" suffix=")">
       <date variable="issued">
         <date-part name="month" form="short" suffix=" "/>
@@ -394,12 +425,12 @@
           <text macro="container"/>
         </group>
         <text variable="page-first"/>
-        <text variable="locator" prefix=", "/>
+        <text macro="pincite" prefix=", "/>
         <text macro="issuance" prefix=" (" suffix=")"/>
       </else-if>
       <else-if type="book">
         <text variable="title" font-variant="small-caps"/>
-        <text variable="locator" prefix=" "/>
+        <text macro="pincite" prefix=" "/>
         <text macro="issuance" prefix=" (" suffix=")"/>
       </else-if>
       <else-if type="song broadcast" match="any">
@@ -456,7 +487,7 @@
             <text variable="volume"/>
             <text macro="container"/>
             <text variable="page-first"/>
-            <text variable="locator"/>
+            <text macro="pincite"/>
             <text macro="issuance" prefix="(" suffix=")"/>
           </group>
         </group>
@@ -504,10 +535,22 @@
             <group delimiter=", ">
               <text macro="editor-translator"/>
               <group delimiter=" ">
-                <group delimiter=" ">
-                  <text variable="edition"/>
-                  <label variable="edition" form="short"/>
-                </group>
+                <!-- Rule 15.4: append "ed." only when the Edition field is a
+                     bare number/ordinal (3, 3d, 11th). Anything else (rev. ed.,
+                     2d rev. ed.) is rendered verbatim - CSL cannot inspect
+                     content beyond the numeric test, so non-numeric values
+                     must contain the complete Bluebook text. -->
+                <choose>
+                  <if is-numeric="edition">
+                    <group delimiter=" ">
+                      <text variable="edition"/>
+                      <label variable="edition" form="short"/>
+                    </group>
+                  </if>
+                  <else>
+                    <text variable="edition"/>
+                  </else>
+                </choose>
                 <date variable="issued">
                   <date-part name="year"/>
                 </date>
@@ -519,10 +562,35 @@
     </choose>
   </macro>
   <macro name="at_page">
-    <group delimiter=" ">
-      <text value="at"/>
-      <text variable="locator"/>
-    </group>
+    <!-- Rules 3.3-3.4: "at" only introduces page pincites. Section/paragraph
+         (and other) locators render via their symbol term with no "at"
+         (Id. § 4, Id. ¶¶ 12-13) - citeproc pluralizes the symbol for ranges. -->
+    <choose>
+      <if locator="page">
+        <group delimiter=" ">
+          <text value="at"/>
+          <text variable="locator"/>
+        </group>
+      </if>
+      <else>
+        <text macro="pincite"/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="pincite">
+    <!-- Bare pincite (no "at"): page locators render as the bare number
+         (TITLE 25), anything else gets its symbol label (TITLE § 5). -->
+    <choose>
+      <if locator="page">
+        <text variable="locator"/>
+      </if>
+      <else>
+        <group delimiter=" ">
+          <label variable="locator" form="symbol"/>
+          <text variable="locator"/>
+        </group>
+      </else>
+    </choose>
   </macro>
   <macro name="container">
     <choose>
@@ -588,7 +656,7 @@
                 <text variable="volume"/>
                 <text variable="container-title" form="short"/>
                 <group delimiter=" ">
-                  <text value="§"/>
+                  <label variable="section" form="symbol"/>
                   <text variable="section"/>
                 </group>
               </group>
@@ -625,6 +693,18 @@
                         </else-if>
                       </choose>
                     </else-if>
+                    <!-- Rule 4.2: authorless items need a short title before
+                         "supra" - otherwise the cite is a bare "supra note N".
+                         Font tracks the full-cite rendering of each type. -->
+                    <else-if type="book graphic motion_picture report" match="any">
+                      <text variable="title" form="short" font-variant="small-caps"/>
+                    </else-if>
+                    <else-if type="article manuscript thesis document" match="any">
+                      <text variable="title" form="short"/>
+                    </else-if>
+                    <else>
+                      <text variable="title" form="short" font-style="italic"/>
+                    </else>
                   </choose>
                 </group>
                 <group delimiter=" ">
