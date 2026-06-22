@@ -27,6 +27,7 @@ A CSL 1.0 note-style **citation style** for Zotero implementing Bluebook legal c
 3. **Auto-delete head branches is enabled** on this repo. After a PR merges, its branch is gone — if a follow-up commit needs to land, open a new PR off main, don't try to re-push the old branch.
 4. **`main` is protected** (no force-push, no deletion). Develop on feature branches named `claude/<short-slug>`.
 5. **Don't skip hooks or bypass the workflow**. If the `bump-updated.yml` workflow fails, diagnose it — don't work around it.
+6. **Bump the README's "Style last updated" date on every base-style PR.** Author preference: whenever a PR changes `BluebookDSEStyle.csl`, update the human-readable date in the blockquote at the top of `README.md` (line ~5, `**Style last updated: …**`) to the PR date, in the same PR. This is separate from the CSL's `<updated>` element (auto-rewritten by `bump-updated.yml`) — the README date is *not* automated. README-only PRs don't need it.
 
 ## CSL design choices (intentional)
 
@@ -107,5 +108,5 @@ Update this section when any of the above ships, or when a new batch of work mat
 
 - `xmllint --noout BluebookDSEStyle.csl` is clean.
 - Install the modified style in Zotero and spot-check at least: one case, one book with 3+ authors, one journal article, one forthcoming article (with `status: forthcoming`), one webpage (with accessed date), one newspaper article (with both page and URL set), one podcast (Item Type Podcast, with Podcaster, Title, Publisher, Date, URL set).
-- `<updated>` will be rewritten automatically by the workflow; don't bother editing it manually.
+- `<updated>` will be rewritten automatically by the workflow; don't bother editing it manually. **But do** hand-update the README's "Style last updated" date (top blockquote) — that one isn't automated (see workflow convention #6).
 - Validate against the official CSL schema, not just XML well-formedness: `java -jar jing.jar -c csl.rnc BluebookDSEStyle.csl`. **Schema-clean doesn't guarantee Zotero-clean** — Zotero's installer is stricter than the spec for some attribute placements (e.g., `font-variant` directly on `<names>`).
