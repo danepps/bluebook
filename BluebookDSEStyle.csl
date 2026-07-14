@@ -707,19 +707,26 @@
                     </else>
                   </choose>
                 </group>
-                <!-- Rule 4.2: "note N" is grouped with the note number so both
-                     drop out when first-reference-note-number is empty (the first
-                     reference is in this same footnote) - leaving a bare "supra"
-                     rather than the stray "supra note" the old flat group emitted. -->
+                <!-- Rule 4.2: "note N" is isolated behind a choose. When
+                     first-reference-note-number is empty (the first reference is in
+                     this same footnote) nothing renders inside the supra group, so
+                     the descriptive "supra" survives on its own - a bare "supra"
+                     instead of the old stray "supra note". Grouping "note N" with
+                     the variable directly would suppress "supra" too, because CSL
+                     suppresses a group whose only *rendered* variable is empty. -->
                 <choose>
                   <if type="article-journal" variable="status" match="all">
                     <group delimiter=" ">
                       <group delimiter=" ">
                         <text value="supra" font-style="italic"/>
-                        <group delimiter=" ">
-                          <text value="note"/>
-                          <text variable="first-reference-note-number"/>
-                        </group>
+                        <choose>
+                          <if variable="first-reference-note-number">
+                            <group delimiter=" ">
+                              <text value="note"/>
+                              <text variable="first-reference-note-number"/>
+                            </group>
+                          </if>
+                        </choose>
                       </group>
                       <text variable="locator" prefix="(manuscript at " suffix=")"/>
                     </group>
@@ -728,10 +735,14 @@
                     <group delimiter=", ">
                       <group delimiter=" ">
                         <text value="supra" font-style="italic"/>
-                        <group delimiter=" ">
-                          <text value="note"/>
-                          <text variable="first-reference-note-number"/>
-                        </group>
+                        <choose>
+                          <if variable="first-reference-note-number">
+                            <group delimiter=" ">
+                              <text value="note"/>
+                              <text variable="first-reference-note-number"/>
+                            </group>
+                          </if>
+                        </choose>
                       </group>
                       <text macro="at_page"/>
                     </group>
