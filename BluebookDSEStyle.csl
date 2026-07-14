@@ -707,24 +707,36 @@
                     </else>
                   </choose>
                 </group>
-                <group delimiter=" ">
-                  <text value="supra" font-style="italic"/>
-                  <text value="note"/>
-                  <choose>
-                    <if type="article-journal" variable="status" match="all">
+                <!-- Rule 4.2: "note N" is grouped with the note number so both
+                     drop out when first-reference-note-number is empty (the first
+                     reference is in this same footnote) - leaving a bare "supra"
+                     rather than the stray "supra note" the old flat group emitted. -->
+                <choose>
+                  <if type="article-journal" variable="status" match="all">
+                    <group delimiter=" ">
                       <group delimiter=" ">
-                        <text variable="first-reference-note-number"/>
-                        <text variable="locator" prefix="(manuscript at " suffix=")"/>
+                        <text value="supra" font-style="italic"/>
+                        <group delimiter=" ">
+                          <text value="note"/>
+                          <text variable="first-reference-note-number"/>
+                        </group>
                       </group>
-                    </if>
-                    <else>
-                      <group delimiter=", ">
-                        <text variable="first-reference-note-number"/>
-                        <text macro="at_page"/>
+                      <text variable="locator" prefix="(manuscript at " suffix=")"/>
+                    </group>
+                  </if>
+                  <else>
+                    <group delimiter=", ">
+                      <group delimiter=" ">
+                        <text value="supra" font-style="italic"/>
+                        <group delimiter=" ">
+                          <text value="note"/>
+                          <text variable="first-reference-note-number"/>
+                        </group>
                       </group>
-                    </else>
-                  </choose>
-                </group>
+                      <text macro="at_page"/>
+                    </group>
+                  </else>
+                </choose>
               </group>
             </else>
           </choose>
