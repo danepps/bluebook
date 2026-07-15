@@ -194,7 +194,12 @@
         <group font-style="italic">
           <group delimiter=" " font-style="normal">
             <group delimiter=", ">
-              <text variable="title"/>
+              <!-- Case name routes through the author macro (a names/author node
+                   with a title substitute) rather than a bare title, so Zotero's
+                   "Omit Author" suppresses the case name - leaving just
+                   "410 U.S. 113 (1973)" when the party names already appear in the
+                   sentence. Output is unchanged when the author is not suppressed. -->
+              <text macro="author"/>
               <text variable="volume"/>
             </group>
             <text macro="container"/>
