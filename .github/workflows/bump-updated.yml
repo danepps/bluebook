@@ -6,6 +6,7 @@ on:
     paths:
       - BluebookDSEStyle.csl
       - BluebookDSEStyle-Experimental.csl
+      - BluebookDSEStyle-EtAl.csl
 
 permissions:
   contents: write
