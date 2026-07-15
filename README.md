@@ -327,6 +327,8 @@ Item Type `Case`.
 
 > Fill the **Short Title** field on the case (e.g., `Brown`) to control how the short name appears.
 
+> **Leave the Court field blank for the U.S. Supreme Court (Rule 10.4(a)).** Citation to `U.S.` (or `S. Ct.`, `L. Ed.`) already identifies the Supreme Court, so its name is omitted from the parenthetical — a SCOTUS cite ends `… (1954)`, **not** `… (U.S. Supreme Court 1954)`. If Zotero auto-filled the Court field on import, clear it. For lower federal and state courts, keep the Court field filled (`9th Cir.`, `S.D.N.Y.`) so the paren renders `(9th Cir. 2020)`. The style prints whatever is in the Court field verbatim — it can't recognize "Supreme Court" and drop it for you (CSL can't inspect a field's text), so this one is on data entry.
+
 > **Rule 10.9's five-footnote rule now works.** Bluebook's Rule 10.9 — use a short form only if the full cite appears in the same footnote or one of the preceding five footnotes, otherwise re-cite in full — is applied automatically. The style short-forms a subsequent case cite only when the prior cite is within five footnotes; beyond that window it reverts to the full cite (`Brown v. Board of Education, 347 U.S. 483 (1954)`). This relies on Zotero's footnote-distance tracking, so it's accurate within a live document but won't survive being copied into a context where the processor can't see the surrounding notes. Personally, this author still typically **enters cases and case short forms manually** in the footnote text rather than through Zotero, and that remains a reasonable workflow if precise case-citation behavior matters to you.
 
 ### Institutional report (Bluebook Rule 15.7)
