@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
   <info>
-    <title>Bluebook Style — Epps Version (10+/4+ Et Al.)</title>
-    <id>https://danepps.github.io/bluebook/BluebookDSEStyle-EtAl.csl</id>
-    <link href="https://danepps.github.io/bluebook/BluebookDSEStyle-EtAl.csl" rel="self"/>
+    <title>Bluebook Style — Epps Version</title>
+    <id>https://danepps.github.io/bluebook/BluebookDSEStyle.csl</id>
+    <link href="https://danepps.github.io/bluebook/BluebookDSEStyle.csl" rel="self"/>
     <link href="https://www.legalbluebook.com/" rel="documentation"/>
     <author>
       <name>Bruce D'Arcus</name>
