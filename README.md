@@ -404,6 +404,23 @@ Lowercase keys are the convention; Zotero's parser is actually case-insensitive,
 
 ## Changelog
 
+### July 2026 — "Omit Author" suppresses the case name
+
+- **Zotero's "Omit Author" checkbox now drops the case name from a full case cite**, leaving just `410 U.S. 113 (1973)` — for Bluebook Rule 10.9's grammatical-use situation, where the party names already appear in your sentence. Output is unchanged when the box isn't checked; short-form case cites already honored it.
+- **Data-entry note for Supreme Court cases:** leave the **Court** field blank — Rule 10.4(a) omits the court when the `U.S.` reporter conveys it, and pure CSL can't suppress the court name selectively. See the case section above.
+
+### July 2026 — *supra* re-cites in the same footnote (Rule 4.2)
+
+- **Re-citing a work later in the same footnote as its first reference** now renders `Author, supra, at 12` — a bare *supra* with no note number, per Rule 4.2. Previously the missing note number produced a malformed `supra note at 12`. The forthcoming-article `(manuscript at N)` short form gets the same treatment.
+
+### June 2026 — compliance batch: locator labels, authorless *supra*, editions, statutes
+
+- **Non-page pincites get their proper labels (Rules 3.3–3.4).** `Id. § 4`, `Id. ¶¶ 12–13` (symbols pluralize for ranges) instead of `Id. at 4`; `at` now introduces only page pincites. Applies everywhere pincites render, including first cites (`TITLE § 5 (2010)`).
+- **Authorless works get a short-title *supra* form (Rule 4.2).** A subsequent cite to an authorless newspaper, magazine, webpage, etc. now renders *Short Title*, *supra* note N instead of a bare `supra note N`, with the short title's font tracking the full cite (small caps / roman / italic by type).
+- **Edition field: `ed.` auto-appends only for numeric editions (Rule 15.4).** `3`, `3d`, `11th` → `3d ed.`; any other value renders verbatim, so type the complete Bluebook text (`rev. ed.`, `2d rev. ed.`). **Migration note:** items with a bare `rev.` in Edition should be updated to `rev. ed.`.
+- **Statutes rewritten per Rule 12.** Session-law form with a `Stat.` page when Pages is set (section number before the volume), year parenthetical from Date Enacted (leave it blank for the current official U.S.C., Rule 12.3.2), automatic `§§` for ranges, and pre-1957 chaptered session laws via `chapter-number: N` in Extra (Rule 12.4). See the statute section above.
+- **License upgraded to CC BY-SA 4.0** (from the base style's 3.0; same license elements, later version).
+
 ### May 2026 — Rule 10.9 five-footnote rule
 
 - **Case short forms now respect Bluebook Rule 10.9's five-footnote rule.** A subsequent case cite uses the short form (`*Brown*, 347 U.S. at 495`) only when the prior cite is within five footnotes; beyond that window it reverts to a full cite. Implemented via citeproc's footnote-distance tracking (`near-note-distance="5"`). Full case cites also now emit an explicit italics-off so a short-form-then-full re-render doesn't leave a stale italic run in Word.
