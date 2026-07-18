@@ -2,7 +2,7 @@
 
 A [Bluebook](https://www.legalbluebook.com/) legal-citation style for [Zotero](https://www.zotero.org/), adapted by **Prof. Daniel Epps** (Washington University School of Law) from the community Bluebook CSL style. (The file is a standard CSL 1.0 style, so it also works in other CSL-compatible processors like Pandoc or Mendeley — but Zotero is the intended and primary target, and the rest of this guide assumes Zotero.)
 
-> **Style last updated: May 31, 2026.** If you installed this style previously, see [Updating](#updating) below to get the latest version.
+> **Style last updated: July 15, 2026.** If you installed this style previously, see [Updating](#updating) below to get the latest version.
 
 ---
 
