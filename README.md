@@ -404,6 +404,11 @@ Lowercase keys are the convention; Zotero's parser is actually case-insensitive,
 
 ## Changelog
 
+### September 12, 2026 — Separate first and subsequent author thresholds
+
+- Both styles list all authors for works with up to four authors on first citation, then use the first author plus *et al.* for subsequent citations of works with four or more authors. Three-author works retain all three names. Citations rendered as *id.* retain that form.
+- Bibliographies retain their existing threshold of five or more authors.
+
 ### July 2026 — "Omit Author" suppresses the case name
 
 - **Zotero's "Omit Author" checkbox now drops the case name from a full case cite**, leaving just `410 U.S. 113 (1973)` — for Bluebook Rule 10.9's grammatical-use situation, where the party names already appear in your sentence. Output is unchanged when the box isn't checked; short-form case cites already honored it.
